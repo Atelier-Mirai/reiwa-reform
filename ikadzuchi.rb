@@ -67,13 +67,17 @@ module Ikadzuchi
         m[:image] = "#{construction_directory_name}/#{m[:image]}"
       end
       # images_with_memo # =>
-      # [{:image=>"ot01.jpg", :caption=>"高圧洗浄", :comment=>""},
-      #  {:image=>"ot02.jpg", :caption=>"外壁の高圧洗浄", :comment=>""},
-      #  {:image=>"ot03.jpg", :caption=>"屋根の現状1", :comment=>""}]
+      # [{:image=>"R01-11-26/ot01.jpg", :caption=>"高圧洗浄", :comment=>""},
+      #  {:image=>"R01-11-26/ot02.jpg", :caption=>"外壁の高圧洗浄", :comment=>""},
+      #  {:image=>"R01-11-26/ot03.jpg", :caption=>"屋根の現状1", :comment=>""}]
 
       # 頁を付与
       slim = Ikadzuchi::replace_with_pagination(photos_template, info, images_with_memo, 12)
-      # src/reform/_partialディレクトリに、施工写真達のslimを出力
+
+      # ページ先頭へ戻れるよう、タグ追加
+      slim << "\n#page_top\n  a href=\"#\""
+
+      # 施工写真達のslimを出力
       Ikadzuchi::write "#{construction_directory_name}.html.slim", slim
 
       # 施工事例 一覧の生成

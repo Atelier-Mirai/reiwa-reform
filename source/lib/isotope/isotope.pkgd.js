@@ -14,6 +14,10 @@
  * MIT license
  */
 
+/**
+ * Revise by Atelier Mirai
+ */
+
 /* jshint browser: true, strict: true, undef: true, unused: true */
 
 ( function( window, factory ) {
