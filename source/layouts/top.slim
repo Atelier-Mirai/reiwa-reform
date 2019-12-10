@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    title
+      = current_page.data.title || "建築リフォームならホームメイド"
+    meta name="description" content = "株式会社ホームメイドは、建築リフォームを専門とする会社です。木造住宅の外壁塗装・床や畳の入れ替え・内装クロス・建具補修・浴室台所などの水回り改修まで、「住む人の愛が溢れる、やって良かった嬉しいリフォーム」の心をお客様にご提案します。"
+
+    // favicon
+    = favicon_tag 'favicon.ico'
+    link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"
+
+    // stylesheets
+    link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    = stylesheet_link_tag "style"
+
+    // scripts
+    script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    script src="https://cdn.jsdelivr.net/npm/ie-buster@1.1.0/dist/ie-buster.min.js"
+    = javascript_include_tag "site"
+
+  body.top
+    = partial 'partial/header'
+    = partial 'partial/billboard'
+    = yield
+    = partial 'partial/footer'

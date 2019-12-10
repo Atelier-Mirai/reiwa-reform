@@ -1,0 +1,30 @@
+nav.page-nav
+  ul
+    li
+      = link_to '/company.html'
+        i.far.fa-building.fa-fw
+        | 会社案内
+    li
+      = link_to '/works.html'
+        i.fas.fa-home.fa-fw
+        | 施工事例
+    li
+      = link_to '/access.html'
+        i.fas.fa-car.fa-fw
+        | 交通案内
+    li
+      = link_to '/contact.html'
+        i.far.fa-envelope.fa-fw
+        | お問合せ
+
+/ iPhone でのハンバーガーメニュー 開くボタン表示
+button.page-btn onclick="menu_toggle()" type="button"
+  span.fas.fa-bars title="メニューを開く"
+/ iPhone でのナビメニュー 閉じるボタン
+button.page-btn-close onclick="menu_toggle()" type="button"
+  span.fas.fa-times title="メニューを閉じる"
+/ iPhone でのナビメニュー 動作用のscript (openクラス付与/削除)
+javascript:
+  function menu_toggle() {
+    document.querySelector('.page').classList.toggle('open');
+  }

@@ -1,0 +1,61 @@
+scss:
+  .card.member {
+    grid-template-columns: 200px 1fr;
+    grid-template-rows:    auto;
+    margin-bottom: 1rem;
+    .card-image {
+      grid-colums: 1;
+      grid-rows:   1;
+      padding: 0.5rem;
+    }
+    .card-header {
+      grid-column: 2;
+      grid-row:   1;
+      dl {
+        margin-top: 1rem;
+        dd {
+          margin-left: 1rem;
+        }
+      }
+    }
+    .card-body {
+      grid-column: 1/3;
+      grid-row:   2;
+    }
+  }
+
+h1.mb-2 仲間紹介
+p.mb-3
+  | ホームメードの仲間達を紹介します。
+
+.card.member
+  .card-image
+    = image_tag 'member0.jpg', class: 'img-responsive'
+  .card-header
+    .card-title.h5 臼井 常雄
+    .card-subtitle.text-gray 代表取締役
+    dl
+      dt 趣味
+      dd パソコン
+      dt 座右の銘
+      dd 一期一会
+  .card-body
+    p
+      | 小さな出会いが、大きく人生を変えていく。一瞬の時間を大切にしたい。
+      | あなたと出会えた歓びが、あなたにとっても大きな喜びと感動に繋がっていく。
+      | そんな仕事がしたいと思っています。
+
+.card.member
+  .card-image
+    = image_tag 'member1.jpg', class: 'img-responsive'
+  .card-header
+    .card-title.h5 竹内 泉
+    .card-subtitle.text-gray 現場管理主任
+    dl
+      dt 趣味
+      dd 家庭菜園
+      dt 座右の銘
+      dd 小さな一歩は勇気を持って踏み出すことから始めれば良い。
+  .card-body
+    p
+      | 現場の管理から現調、あらゆるリフォームに対応した現場管理に努めています。難しいリフォームには培って来た経験が生きます。

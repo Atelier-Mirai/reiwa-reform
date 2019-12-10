@@ -1,0 +1,13 @@
+h1.construction_name
+  | #{construction_name}
+p.construction_period
+  | #{construction_period}
+p.construction_outline
+  | #{construction_outline}
+
+figure.figure.work_figure
+  figcaption.figure-caption.text-left.h4
+    | #{caption}
+  img src="#{image}" alt="#{caption}"
+  p.text-gray
+    | #{comment}

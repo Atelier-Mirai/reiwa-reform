@@ -1,0 +1,43 @@
+main.page-main
+  h2.mb-2
+    | お問い合わせ
+  p.mb-4
+    |　株式会社ホームメイドは、木部外壁の修復、防水塗装を専門に、リフォーム全般にわたる業務を手がけています。
+    br
+    |『嬉しい』『楽しい』『ありがたい』リフォームを合い言葉に、施主様にやって良かったと喜んでいただける様、日々精進努力しております。
+    br
+    | 　お気軽にご連絡ください。
+
+  p.text-right.mb-2
+    span.text-error
+      | *
+    | は必須項目です。
+
+  form method="post" action="/success.html" netlify="netlify"
+    input.form-input type="hidden" name="Subject" value="Web お問い合わせ"
+
+    label.form-label.required
+      | お問い合わせ内容
+    textarea.form-input name="message" cols="40" rows="12" required=""
+    br
+    label.form-label.required
+      | お名前
+    input.form-input type="text" name="name" required=""
+    br
+    label.form-label.required
+      | フリガナ
+    input.form-input type="text" name="kana" required=""
+    br
+    label.form-label.required
+      | e-mail
+    input.form-input type="text" name="email" required=""
+    br
+    label.form-label.required
+      | 電話番号(半角)
+    input.form-input type="text" name="tel" required=""
+    br
+    label.form-label
+      | FAX番号(半角)
+    input.form-input type="text" name="fax"
+    br
+    input.form-input.btn.btn-primary type="submit" value="送信"

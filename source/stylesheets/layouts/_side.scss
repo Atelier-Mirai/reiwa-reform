@@ -1,0 +1,26 @@
+/* サイドコンテンツ */
+.page-aside {
+  grid-area:  side;
+  // background: var(--side-color);
+
+  ul {
+    text-align: center;
+    li {
+      display: inline-block;
+      img.img-responsive {
+        // max-width: 25vw;
+        max-width: 18%;
+      }
+    }
+  }
+
+}
+
+/* ##### 画面の横幅568ピクセル以上 ##### */
+@media (min-width: 568px) {
+  /* サイドコンテンツ */
+  .page-aside {
+    grid-area: side;
+    margin-right: 1rem;
+  }
+}

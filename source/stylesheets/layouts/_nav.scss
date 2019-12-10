@@ -1,0 +1,92 @@
+/* ナビゲーション */
+.page-nav {
+  grid-area:        nav;
+  z-index:          100;
+  // background-color: var(--nav-color);
+  // display:          none;
+  display:          block;
+}
+
+.open .page-nav {
+  display: block;
+  height:  auto;
+}
+
+.page-nav ul {
+  margin:     0;
+  padding:    0;
+  list-style: none;
+  text-align: center;
+}
+.page-nav li {
+  display: inline-grid;
+}
+
+/* ナビメニュー用 ボタン */
+.page-btn,
+.page-btn-close {
+  grid-column:      1;
+  grid-row:         1;
+  // justify-self:     start;
+  justify-self:     end;
+  align-self:       center;
+  padding:          20px;
+  border:           none;
+  background-color: transparent;
+  color:            black;
+  font-size:        28px;
+  cursor:           pointer;
+}
+
+.page-btn-close {
+  display: none;
+}
+
+.open .page-btn {
+  display: none;
+}
+
+.open .page-btn-close {
+  display: block;
+}
+
+/* ハンバーガーなくてよさそうなので */
+.page-btn {
+  display: none;
+}
+
+.page-nav ul li a {
+  // よりクリックしやすくするために
+  padding: 0.5rem 0.5rem 0.1rem 0.5rem;
+  margin: 0 1rem;
+  text-decoration: none;
+  color: $tokiwa-midori;
+  border-bottom: 1px solid $tokiwa-midori;
+  &:hover {
+    color: $fuka-midori;
+    border-bottom: 1px solid $fuka-midori;
+    font-weight: bold;
+    font-size: larger;
+    transition: 0.3s;
+  }
+}
+
+/* ##### 画面の横幅568ピクセル以上 ##### */
+@media (min-width: 568px) {
+  .page-nav ul li a {
+    // よりクリックしやすくするために
+    padding: 0 0.5rem 0.1rem 0.5rem;
+  }
+  /* ナビゲーション */
+  .page-nav {
+    display: block;
+    margin: 0.75rem 0;
+  }
+  .page-nav li {
+    display: inline-grid;
+  }
+  /* ボタン */
+  .page-btn {
+    display: none;
+  }
+}

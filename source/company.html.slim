@@ -1,0 +1,43 @@
+javascript:
+  $(() => {
+    // 最初は active 以外のコンテンツを非表示に
+    // $(".tab-content div:not("+$(".tab-item.active a").attr("href")+")").hide();
+    $(".tab-content").hide();
+    let active_id = $(".tab-item.active a").attr("href");
+    $(`${active_id}`).show();
+
+    //tab がクリックされたときに、そのコンテンツを表示
+    $(".tab-item").on('click', function(){
+      $(".tab-item").removeClass("active");
+      $(this).addClass("active");
+      $(".tab-content").hide();
+      $($(this).find('a').attr("href")).show();
+      return false;
+    });
+  });
+
+main.page-main
+
+  ul.tab.tab-block
+    li.tab-item.active
+      a href="#concept" 経営理念
+    li.tab-item
+      a href="#member" 仲間紹介
+    li.tab-item
+      a href="#history" 沿　　革
+    li.tab-item
+      a href="#overview" 会社概要
+    li.tab-item
+      a href="#recruit" 採用情報
+
+  .mt-2
+  .tab-content#concept
+    = partial 'partial/company_concept'
+  .tab-content#member
+    = partial 'partial/company_member'
+  .tab-content#history
+    = partial 'partial/company_history'
+  .tab-content#overview
+    = partial 'partial/company_overview'
+  .tab-content#recruit
+    = partial 'partial/company_recruit'

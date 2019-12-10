@@ -1,0 +1,36 @@
+/*--------------------------------------------------------------
+# 工事関係
+--------------------------------------------------------------*/
+.work_figure {
+  width: 100%;
+  /* ##### 画面の横幅568ピクセル以上 ##### */
+  @media (min-width: 568px) {
+    width: 75%;
+  }
+  margin: auto;
+  margin-bottom: 1.5rem;
+  img {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 0%;
+    /* ##### 画面の横幅568ピクセル以上 ##### */
+    @media (min-width: 568px) {
+      padding-left: 20%;
+    }
+  }
+}
+
+.construction_name {
+  text-align: center;
+}
+.construction_period {
+  text-align: right;
+  margin-right: 2rem;
+}
+.construction_outline {
+  margin: 0.5rem 0.5rem;
+  /* ##### 画面の横幅568ピクセル以上 ##### */
+  @media (min-width: 568px) {
+    margin: 1rem 3rem;
+  }
+}

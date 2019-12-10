@@ -1,0 +1,101 @@
+/* ヘッダー */
+.page-head {
+  grid-area: header;
+  padding:          0;
+
+  // 株式会社 ホームメイドは 木部や一般外壁の防水塗装・木部補修工事・水回り・内装クロス・畳入替え・建具補修などの建築リフォーム工事を専門とする会社です。
+  .header-catch-copy {
+    font-size: 0.6rem;
+    font-weight: normal;
+    background: $fuka-midori;
+    color: white;
+    padding: 0.33rem 0;
+    text-align:       center;
+  }
+
+  .header-info {
+    display: grid;
+    margin: 0.33rem 0;
+    grid-template-columns: 1fr;
+
+    // 金縁の枠を作成
+    .frame {
+      margin: 0 0.5rem;
+      display: inline-block;
+      position: relative;
+      background-color: lighten($konjiki, 15%);
+      border: 3px solid darken($konjiki, 10%);
+      box-shadow: 0 0 4px #999;
+      .border {
+        border: ridge thick $konjiki;
+        height: 100%;
+        text-align: center;
+        // 株式会社ホームメイド
+        a#logo {
+          text-decoration: none;
+          h1 {
+            padding: 0.75rem 0;
+            color: $shikkoku;
+            text-shadow: 2px 2px 2px lighten($amairo2, 80%), 4px 4px 2px rgba(0,0,0,0.3);
+            font-size: 1.1rem;
+            span {
+              margin-left: 0.25rem;
+              font-size: 1.25rem;
+            }
+          }
+        }
+      }
+      &::after {
+        position: absolute;
+        display: block;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        // transform: rotate(10deg);
+        background: #fff;
+        z-index: -1;
+      }
+    }
+
+    // 住所や電話番号
+    .address {
+      text-align: right;
+      padding: 0.5rem 0.5rem 0 0;
+
+      .phone {
+        a {
+          font-size: 1.33rem;
+          border-bottom:   none;
+          text-decoration: none;
+          color: $tokiwa-midori;
+          &:hover {
+            transition: 0.3s;
+            color: $fuka-midori;
+          }
+        }
+        letter-spacing: 1px;
+        font-size: 1.33rem;
+      }
+      .location {
+        font-size: 0.8rem;
+        color: #444;
+      }
+    }
+  }
+}
+
+/* ##### 画面の横幅568ピクセル以上 ##### */
+@media (min-width: 568px) {
+  .page-head .header-info {
+    grid-template-columns: 1fr 1fr;
+    .frame {
+      grid-column: 1;
+    }
+    .address {
+      grid-column: 2;
+    }
+  }
+}
