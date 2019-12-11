@@ -1,7 +1,6 @@
 javascript:
   $(() => {
     // 最初は active 以外のコンテンツを非表示に
-    // $(".tab-content div:not("+$(".tab-item.active a").attr("href")+")").hide();
     $(".tab-content").hide();
     let active_id = $(".tab-item.active a").attr("href");
     $(`${active_id}`).show();
@@ -17,18 +16,28 @@ javascript:
   });
 
 main.page-main
-
-  ul.tab.tab-block
-    li.tab-item.active
-      a href="#concept" 経営理念
-    li.tab-item
-      a href="#member" 仲間紹介
-    li.tab-item
-      a href="#history" 沿　　革
-    li.tab-item
-      a href="#overview" 会社概要
-    li.tab-item
-      a href="#recruit" 採用情報
+  nav.company-nav.mt-3.mb-3
+    ul.tab.tab-block
+      li.tab-item.active
+        a href="#concept"
+          | 経営
+          | 理念
+      li.tab-item
+        a href="#member"
+          | 仲間
+          | 紹介
+      li.tab-item
+        a href="#history"
+          | 会社
+          | 沿革
+      li.tab-item
+        a href="#overview"
+          | 会社
+          | 概要
+      li.tab-item
+        a href="#recruit"
+          | 採用
+          | 情報
 
   .mt-2
   .tab-content#concept

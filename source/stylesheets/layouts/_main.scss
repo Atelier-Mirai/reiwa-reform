@@ -1,16 +1,9 @@
 /* メインコンテンツ */
 .page-main {
   grid-area:  main;
-  // background: var(--main-color);
   max-width: 100vw;
-  padding: 0 1rem;
+  // /* ##### 画面の横幅568ピクセル以上 ##### */
+  @media (min-width: 568px) {
+    padding: 0 1rem;
+  }
 }
-
-// /* ##### 画面の横幅568ピクセル以上 ##### */
-// @media (min-width: 568px) {
-//   /* メインコンテンツ */
-//   .page-main {
-//     grid-area: main;
-//     max-width: 75vw;
-//   }
-// }

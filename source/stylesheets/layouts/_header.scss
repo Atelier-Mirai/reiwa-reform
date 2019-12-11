@@ -34,6 +34,7 @@
         a#logo {
           text-decoration: none;
           h1 {
+            margin: 0;
             padding: 0.75rem 0;
             color: $shikkoku;
             text-shadow: 2px 2px 2px lighten($amairo2, 80%), 4px 4px 2px rgba(0,0,0,0.3);
@@ -89,13 +90,15 @@
 
 /* ##### 画面の横幅568ピクセル以上 ##### */
 @media (min-width: 568px) {
-  .page-head .header-info {
-    grid-template-columns: 1fr 1fr;
-    .frame {
-      grid-column: 1;
-    }
-    .address {
-      grid-column: 2;
+  .page-head {
+    .header-info {
+      grid-template-columns: 1fr 1fr;
+      .frame {
+        grid-column: 1;
+      }
+      .address {
+        grid-column: 2;
+      }
     }
   }
 }
