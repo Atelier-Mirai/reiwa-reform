@@ -20,7 +20,7 @@ $(function(){
   $(".page-content").hide();
   $(".page-content.active").show();
   var active_id = $(".pagination .page-item.active a").attr("href");
-  $("$("+active_id+")").show();
+  $("active_id").show();
   // page がクリックされたときに、そのコンテンツを表示
   $(".page-item").on("click", function() {
     $(".page-content").hide();

@@ -11,7 +11,7 @@
 }
 
 .page-nav ul {
-  margin:     0;
+  margin:     0 0 1rem 0;
   padding:    0;
   list-style: none;
   text-align: center;
@@ -27,26 +27,28 @@
   }
 }
 
-.company-nav ul {
-  margin:     0;
-  padding:    0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  li {
-    font-size: 0.75rem !important;
-    justify-self: center;
-    width: 2.5rem;
-    /* ##### 画面の横幅568ピクセル以上 ##### */
-    @media (min-width: 568px) {
-      width: 4.5rem;
-    }
-    a {
-      padding: 0 0.5rem 0.1rem 0.5rem;
+.company-nav {
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  ul {
+    margin:     0;
+    padding:    0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    li {
+      font-size: 0.75rem !important;
+      justify-self: center;
+      width: 2.5rem;
+      /* ##### 画面の横幅568ピクセル以上 ##### */
+      @media (min-width: 568px) {
+        width: 4.5rem;
+      }
+      a {
+        padding: 0 0.5rem 0.1rem 0.5rem;
+      }
     }
   }
 }
-
 
 
 

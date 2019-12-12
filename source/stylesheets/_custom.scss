@@ -66,6 +66,9 @@ label.required:after {
 
 .pagination {
   justify-content: flex-end;
+  &:last-child {
+    margin-bottom: 2rem;
+  }
 }
 
 .pagination .page-item a:focus,
