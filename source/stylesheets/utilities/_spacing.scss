@@ -57,8 +57,7 @@ $spacers: (
   margin-left: auto !important;
 }
 
-$values: 25, 50, 75, 100, auto;
-
+$values: 25, 50, 75, 100;
 @each $prop, $abbrev in (width: w, height: h) {
   @each $value in $values {
     .#{$abbrev}-#{$value} {
@@ -68,4 +67,10 @@ $values: 25, 50, 75, 100, auto;
   .m#{$abbrev}-100 {
     max-#{$prop}: 100% !important;
   }
+}
+.w-auto {
+  width: auto !important;
+}
+.h-auto {
+  height: auto !important;
 }

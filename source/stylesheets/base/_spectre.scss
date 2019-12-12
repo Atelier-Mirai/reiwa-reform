@@ -884,7 +884,7 @@ legend {
 .form-input.input-inline {
   display: inline-block;
   vertical-align: middle;
-  width: auto;
+  // width: auto;
 }
 
 .form-input[type="file"] {
@@ -1225,7 +1225,7 @@ textarea.form-input {
 }
 
 .input-group .form-select {
-  width: auto;
+  // width: auto;
 }
 
 .input-group.input-inline {
@@ -1626,7 +1626,7 @@ video.video-responsive::before {
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   max-width: none;
-  width: auto;
+  // width: auto;
 }
 
 .col-mx-auto {
