@@ -1,0 +1,170 @@
+$konpeki:           #007bbb; // 紺碧(こんぺき)
+$shusha:            #e73931; // 朱砂(しゅしゃ)
+$nanowanairo:       #ffec47; // 菜の花色(なのはないろ)
+$konjiki:           #e6b422; // 金色(こんじき)
+$shinryokushoku:    #339933; // 新緑色(しんりょくしょく)
+$gen:               #0d0d0d; // 玄(げん)
+
+.custom-content {
+  .card {
+    border: none;
+    .card-header {
+      padding: 0.25rem;
+      h3.h6.card-title.ellipsis {
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        font-size: 0.85rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+    }
+    .card-body {
+      margin: 0 auto;
+      padding: 0;
+      // 施工事例の説明文の省略記号(...)
+      p.ellipsis {
+        display: inline-block;
+        height: 72px;
+        padding: 0rem 0.46rem;
+        margin: 0;
+        text-align: left;
+        font-size: 0.77rem;
+        line-height: 1.23;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+// .filter-controls {
+//   text-align: center;
+//   margin-bottom: 30px;
+//   .control {
+//     display: inline-block;
+//     width: 240px;
+//     margin: 0 10px;
+//     * {
+//       box-sizing: border-box;
+//     }
+//     .form-control {
+//       width: 100%;
+//       height: 40px;
+//       padding: 0 20px;
+//       border: 2px solid #ccc;
+//       border-radius: 3px;
+//       background-color: #fff;
+//       color: #666;
+//       font-size: 16px;
+//       cursor: pointer;
+//       -webkit-appearance: none;
+//       appearance: none;
+//       &:focus {
+//         outline: 0;
+//         border-color: #0CAAF5;
+//       }
+//     }
+//   }
+// }
+
+.grid-wrapper {
+  // width: 100vw;
+  max-width: 1280px;
+  width: calc(100vw - 40px);
+}
+
+.grid {
+  position: relative;
+  width: calc(100vw - 40px);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.item {
+  position: absolute;
+  width: 246px;
+  // height: 248px;
+  margin: 5px;
+  z-index: 1;
+  transition: transform .6s ease;
+  cursor: pointer;
+  color: $gen;
+
+  &.renovation {
+    .custom-content {
+      border-color: $konjiki;
+      background-color: lighten($konjiki, 30%);
+    }
+  }
+  &.easily {
+    .custom-content {
+      border-color: $shinryokushoku;
+      background-color: lighten($shinryokushoku, 50%);
+    }
+  }
+
+  &.restore {
+    .custom-content {
+      border-color: $shusha;
+      background-color: lighten($shusha, 40%);
+    }
+  }
+
+  &.tile {
+    .custom-content {
+      border-color: $konpeki;
+      background-color: lighten($konpeki, 50%);
+    }
+  }
+
+  &.wall {
+    .custom-content {
+      border-color: darken($nanowanairo, 10%);
+      background-color: lighten($nanowanairo, 25%);
+    }
+  }
+}
+
+.item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display:table;
+}
+.custom-content {
+  display: table-cell;
+  text-align: center;
+  color: #666;
+  border: 2px solid;
+  border-radius: 3px;
+}
+
+@media (max-width: 1280px) {
+  .item {
+    width: calc(20% - 11px);
+  }
+}
+
+@media (max-width: 1084px) {
+  .item {
+    width: calc(25% - 11px);
+  }
+}
+
+@media (max-width: 876px) {
+  .item {
+    width: calc(33.33% - 11px);
+  }
+}
+
+@media (max-width: 640px) {
+  .item {
+    width: calc(50% - 12px);
+    height: calc(33.33% -7px + 31px + 72px);
+  }
+}

@@ -20,14 +20,16 @@
   }
 }
 
-.construction_name {
+.construction-name {
   text-align: center;
 }
-.construction_period {
+
+.construction-period {
   text-align: right;
   margin-right: 2rem;
 }
-.construction_outline {
+
+.construction-outline {
   margin: 0.5rem 0.5rem;
   /* ##### 画面の横幅568ピクセル以上 ##### */
   @media (min-width: 568px) {

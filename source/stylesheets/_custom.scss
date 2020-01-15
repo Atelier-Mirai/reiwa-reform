@@ -51,10 +51,6 @@ dd {
   // transform:rotate(-3deg);
 }
 
-.carousel .img-responsive {
-  width: 100vw;
-}
-
 label.required:after {
   content: "*";
   color: #e85600;
@@ -91,11 +87,6 @@ label.required:after {
   color: #028760;
 }
 
-// colorbox
-a.colorbox {
-  text-decoration: none;
-}
-
 .president_message {
   background: #fff;
   border: .05rem solid #e7e9ed;
@@ -117,14 +108,5 @@ a.colorbox {
 
 .message {
   columns: 2 360px;
-  column-gap: 2rem;
-  padding: 0.5rem 1rem;
-}
-
-// 施工事例の説明文の省略記号(...)
-.ellipsis {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
+  column-gap: 1.5rem;
 }

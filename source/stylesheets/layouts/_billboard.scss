@@ -1,37 +1,23 @@
 .billboard {
   grid-area:  billboard;
-  // margin-top: -1rem !important;
-  max-width: 100vw;
-  h1.catchcopy {
-    align-self: center;
-    align-content: center;
-    font-size: 0.9rem;
-    margin: 0;
+  width: 100vw;
+  height: 270px;
+
+  .container {
+    position: relative;
+    padding: 0;
   }
 
-  .parallax .parallax-content {
-    -webkit-box-shadow: 0 1rem 2.1rem rgba(69, 77, 93, 0.3);
-            box-shadow: 0 1rem 2.1rem rgba(69, 77, 93, 0.3);
-    height: inherit;
-    -webkit-transform: perspective(1000px);
-            transform: perspective(1000px);
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-    -webkit-transition: all .4s ease;
-    transition: all .4s ease;
-    width: 100%; }
-}
-
-
-
-/* ##### 画面の横幅568ピクセル以上 ##### */
-@media (min-width: 568px) {
-  .parallax .parallax-front.position-top-left {
-    width: 70%;
-    h1.catchcopy {
-      font-size: 1.1rem;
-      height: 60%;
-      width:  100%;
-    }
+  .catchcopy {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(69, 77, 93, 0.7);
+    align-self: center;
+    align-content: center;
+    font-size: 1.25rem;
+    margin: 0;
+    z-index: 100;
   }
 }

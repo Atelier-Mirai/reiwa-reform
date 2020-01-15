@@ -188,7 +188,7 @@ module Ikadzuchi
         construction_ended:   "",
         construction_period:  "",
         construction_outline: "",
-        construction_kinds:   ".filter-other",
+        construction_kinds:   "other",
         construction_photo:   ""
       }
       hash[:construction_directory_name] = filename.split('/').first
@@ -203,12 +203,12 @@ module Ikadzuchi
       }
 
       kinds = {
-        '大規模': '.filter-renovation',
-        '簡易': '.filter-easily',
-        '台風直し': '.filter-restore',
-        '瓦・屋根': '.filter-tile',
-        '外壁': '.filter-wall',
-        'その他': '.filter-other'
+        '大規模': 'renovation',
+        '簡易': 'easily',
+        '台風直し': 'restore',
+        '瓦・屋根': 'tile',
+        '外壁': 'wall',
+        'その他': 'other'
       }
 
       info = File.read filename
@@ -223,7 +223,7 @@ module Ikadzuchi
           values = value&.tr('、', ',')&.split(',')
           values&.each { |v| class_names.push kinds[v.to_sym] }
           hash[:construction_kinds] = if class_names.empty?
-                                        '.filter-other'
+                                        'other'
                                       else
                                         class_names.join
                                       end
@@ -244,11 +244,10 @@ module Ikadzuchi
     # @param [String] hash 置換用 key/value
     # @return [String] 置換後のtemplate
     def replace(template, hash)
-      t = template
       hash&.each do |key, value|
-        t = t.gsub("\#{#{key}}", value.to_s)
+        template = template.gsub("\#{#{key}}", value.to_s)
       end
-      t
+      template
     end
 
     # 雛形を置換する

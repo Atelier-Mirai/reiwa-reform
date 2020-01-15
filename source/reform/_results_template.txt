@@ -1,24 +1,33 @@
-section#portfolio.section-bg
-  .container
-    header.section-header
-      h3.section-title 施工実績
-    .row
-      .col-12
-        ul#portfolio-flters
-          li.filter-active data-filter="*"     全　　て
-          li data-filter=".filter-renovation"  大 規 模
-          li data-filter=".filter-easily"      簡　　易
-          li data-filter=".filter-restore"     台風直し
-          li data-filter=".filter-tile"        瓦・屋根
-          li data-filter=".filter-wall"        外　　壁
-  .portfolio-container.thumbnails
+section.grid-wrapper
+  .form-horizontal
+    .form-group
+      .col-3.col-sm-12
+        input.form-input.search-field type="text" id="search-field" placeholder="気になる工事名を入力"
+      .col-3.col-sm-12
+        select.form-select.filter-field
+          option value="" 全ての工事を表示
+          option value="renovation" 大規模工事を表示
+          option value="easily"     簡易工事を表示
+          option value="restore"    台風修理工事を表示
+          option value="tile"       瓦・屋根工事を表示
+          option value="wall"       外壁工事を表示
+    /   | 並び替え
+    /   select.sort-field.form-control
+    /     option value="order"  None
+    /     option value="title"  Order by fruit name
+    /     option value="color"  Order by color name
+  .grid
 
-    .card.portfolio-item#{construction_kinds}.wow.fadeInUp data-wow-delay="0.1s"
-      .card-image
-        a href="reform/#{construction_directory_name}.html"
-          img.img-responsive src="reform/#{construction_directory_name}/#{construction_photo}"
-      .card-header
-        .card-title.h5
-          | #{construction_name}
-        p.ellipsis
-          | #{construction_outline}
+    .item.#{construction_kinds} data-color="#{construction_kinds}" data-title="#{construction_name}"
+      .item-content
+        .custom-content
+          .card
+            .card-image
+              a href="reform/#{construction_directory_name}.html"
+                img.img-responsive src="reform/#{construction_directory_name}/#{construction_photo}"
+            .card-header
+              h3.h6.card-title.ellipsis
+                | #{construction_name}
+            .card-body
+              p.ellipsis
+                | #{construction_outline}

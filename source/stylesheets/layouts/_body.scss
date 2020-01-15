@@ -7,37 +7,21 @@ body {
 }
 
 /* 基本 (iPhone) */
-.page * {
+* {
   margin: 0;
-  box-sizing: border-box; /* borderとpaddingをwidthに含める */
+  box-sizing: border-box;
 }
 
 /* グリッド */
 .page {
   display: grid;
   grid-template:
-    "header"    auto
-    "billboard" auto
-    "nav"       auto
-    "main"      1fr
-    "side"      auto
-    "footer"    auto
-    / 1fr;
-  grid-gap: 1rem;
-  min-height: 100vh;
+    "header    header    header"    auto
+    "billboard billboard billboard" auto
+    ".         nav       ."         auto
+    ".         main      ."         1fr
+    "footer    footer    footer"    auto /
+     20px     1fr       20px;
+  // grid-gap: 0.5rem;
+  // min-height: 100vh;
 }
-
-/* ##### 画面の横幅568ピクセル以上 ##### */
-// @media (min-width: 568px) {
-//   .page {
-//     // grid-template-columns: minmax(4fr, 1024px) minmax(1fr, 256px);
-//     // grid-template-columns: 4fr 1fr;
-//     grid-template:
-//       "header    header"    auto
-//       "billboard billboard" auto
-//       "nav       nav"       auto
-//       "main      side"      1fr
-//       "footer    footer"    auto
-//       / 3fr 1fr;
-//   }
-// }

@@ -1,8 +1,8 @@
-h1.construction_name
+h1.construction-name
   | #{construction_name}
-p.construction_period
+p.construction-period
   | #{construction_period}
-p.construction_outline
+p.construction-outline
   | #{construction_outline}
 
 figure.figure.work_figure

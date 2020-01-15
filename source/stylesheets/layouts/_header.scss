@@ -1,13 +1,13 @@
 /* ヘッダー */
 .page-head {
   grid-area: header;
-  padding:          0;
+  padding:   0;
 
   // 株式会社 ホームメイドは 木部や一般外壁の防水塗装・木部補修工事・水回り・内装クロス・畳入替え・建具補修などの建築リフォーム工事を専門とする会社です。
   .header-catch-copy {
     font-size: 0.6rem;
     font-weight: normal;
-    background: $fuka-midori;
+    background: $fukamidori;
     color: white;
     padding: 0.33rem 0;
     text-align:       center;
@@ -71,10 +71,10 @@
           font-size: 1.33rem;
           border-bottom:   none;
           text-decoration: none;
-          color: $tokiwa-midori;
+          color: $tokiwamidori;
           &:hover {
             transition: 0.3s;
-            color: $fuka-midori;
+            color: $fukamidori;
           }
         }
         letter-spacing: 1px;
