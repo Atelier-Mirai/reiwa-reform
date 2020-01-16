@@ -91,6 +91,19 @@ module Ikadzuchi
 
       # 施工事例 一覧の生成
       results_template = Ikadzuchi::template("_results_template.txt", pagination: false)
+
+      # p info =>
+      # {:construction_name=>"木部外壁塗装工事", :construction_started=>"H28-08-31", :construction_ended=>"H28-08-31", :construction_period=>"H28-08-31 〜 H28-08-31", :construction_outline=>"木部
+      # 外壁塗装の施工手順です。現場調査を行い、足場を組みます。高圧洗浄（水洗い）後に、専用洗浄液による色抜きを行います。風雨に晒され、傷んでいた外壁でしたが、元の美しい木肌を取り戻し、輝いていま
+      # す。", :construction_kinds=>"wall", :construction_photo=>"i5.jpg", :construction_directory_name=>"H28-08-31"}
+
+      # 工事名を９文字までに、工事概要を４２文字までにし、"…" をつける。
+      info[:construction_name] = nil
+      info[:construction_outline] = nil
+      # info[:construction_photo] = nil
+      info[:construction_name] = Ikadzuchi::clamp(info[:construction_name], 10)
+      info[:construction_outline] = Ikadzuchi::clamp(info[:construction_outline], 42)
+      # サムネイル用slimを追記する
       slim = Ikadzuchi::replace(results_template.body, info)
       Ikadzuchi::append "_results.slim", slim
     end
@@ -301,6 +314,17 @@ module Ikadzuchi
       File.open(filename, "a") do |f|
         f.puts text
       end
+    end
+
+    # 文字数制限を行う
+    # @params [String] text
+    # @params [Integer] limit
+    def clamp(text, limit)
+      return if text.nil?
+      if text.size >= limit
+        text = text[0...limit] + "…"
+      end
+      text
     end
   end
 end

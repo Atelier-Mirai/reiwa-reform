@@ -15,10 +15,15 @@ $gen:               #0d0d0d; // 玄(げん)
         padding: 0;
         line-height: 1.2;
         font-size: 0.85rem;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
         overflow: hidden;
+        text-overflow: ellipsis;
+        whte-space: nowrap;
+
+
+        // display: -webkit-box;
+        // -webkit-box-orient: vertical;
+        // -webkit-line-clamp: 1;
+        // overflow: hidden;
       }
     }
     .card-body {
@@ -33,44 +38,14 @@ $gen:               #0d0d0d; // 玄(げん)
         text-align: left;
         font-size: 0.77rem;
         line-height: 1.23;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
-        overflow: hidden;
+        // display: -webkit-box;
+        // -webkit-box-orient: vertical;
+        // -webkit-line-clamp: 4;
+        // overflow: hidden;
       }
     }
   }
 }
-
-// .filter-controls {
-//   text-align: center;
-//   margin-bottom: 30px;
-//   .control {
-//     display: inline-block;
-//     width: 240px;
-//     margin: 0 10px;
-//     * {
-//       box-sizing: border-box;
-//     }
-//     .form-control {
-//       width: 100%;
-//       height: 40px;
-//       padding: 0 20px;
-//       border: 2px solid #ccc;
-//       border-radius: 3px;
-//       background-color: #fff;
-//       color: #666;
-//       font-size: 16px;
-//       cursor: pointer;
-//       -webkit-appearance: none;
-//       appearance: none;
-//       &:focus {
-//         outline: 0;
-//         border-color: #0CAAF5;
-//       }
-//     }
-//   }
-// }
 
 .grid-wrapper {
   // width: 100vw;

@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
     dragEnabled: false
   });
 
+  grid._settings.layout = {
+    horizontal: false,
+    alignRight: false,
+    alignBottom: false,
+    fillGaps: false
+  };
+  grid.layout();
+
   // Set inital search query, active filter, active sort value and active layout.
   searchFieldValue = searchField.value.toLowerCase();
   filterFieldValue = filterField.value;
