@@ -8,6 +8,14 @@ $gen:               #0d0d0d; // 玄(げん)
 .custom-content {
   .card {
     border: none;
+    .card-image {
+      .img-responsive {
+        display: block;
+        height: auto;
+        // max-width: 100%;
+        // width: 200px;
+      }
+    }
     .card-header {
       padding: 0.25rem;
       h3.h6.card-title.ellipsis {
@@ -18,12 +26,10 @@ $gen:               #0d0d0d; // 玄(げん)
         overflow: hidden;
         text-overflow: ellipsis;
         whte-space: nowrap;
-
-
-        // display: -webkit-box;
-        // -webkit-box-orient: vertical;
-        // -webkit-line-clamp: 1;
-        // overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
       }
     }
     .card-body {
@@ -38,18 +44,17 @@ $gen:               #0d0d0d; // 玄(げん)
         text-align: left;
         font-size: 0.77rem;
         line-height: 1.23;
-        // display: -webkit-box;
-        // -webkit-box-orient: vertical;
-        // -webkit-line-clamp: 4;
-        // overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
       }
     }
   }
 }
 
 .grid-wrapper {
-  // width: 100vw;
-  max-width: 1280px;
+  max-width: 1240px;
   width: calc(100vw - 40px);
 }
 
@@ -62,8 +67,6 @@ $gen:               #0d0d0d; // 玄(げん)
 
 .item {
   position: absolute;
-  width: 246px;
-  // height: 248px;
   margin: 5px;
   z-index: 1;
   transition: transform .6s ease;
@@ -119,27 +122,20 @@ $gen:               #0d0d0d; // 玄(げん)
   border-radius: 3px;
 }
 
-@media (max-width: 1280px) {
-  .item {
-    width: calc(20% - 11px);
+.item {
+  @media (min-width: 320px) { // 320px(iPhone SE) 以上で二列表示
+    width: calc(calc(100vw - 40px) / 2 - 10px);
   }
-}
-
-@media (max-width: 1084px) {
-  .item {
-    width: calc(25% - 11px);
+  @media (min-width: 628px) { // 三列表示
+    width: calc(calc(100vw - 40px) / 3 - 10px);
   }
-}
-
-@media (max-width: 876px) {
-  .item {
-    width: calc(33.33% - 11px);
+  @media (min-width: 824px) { // 四列表示
+    width: calc(calc(100vw - 40px) / 4 - 10px);
   }
-}
-
-@media (max-width: 640px) {
-  .item {
-    width: calc(50% - 12px);
-    height: calc(33.33% -7px + 31px + 72px);
+  @media (min-width: 1024px) { // 五列表示
+    width: calc(calc(100vw - 40px) / 5 - 10px);
+  }
+  @media (min-width: 1280px) { // 五列表示(横幅固定)
+    width: 238px;
   }
 }

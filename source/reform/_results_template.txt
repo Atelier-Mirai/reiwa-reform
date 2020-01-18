@@ -18,7 +18,7 @@ section.grid-wrapper
     /     option value="color"  Order by color name
   .grid
 
-    .item.#{construction_kinds} data-color="#{construction_kinds}" data-title="#{construction_name}"
+    .item.#{construction_kinds} data-color="#{construction_kinds}" data-title="#{construction_name}" data-started="#{construction_started}"
       .item-content
         .custom-content
           .card
@@ -28,6 +28,7 @@ section.grid-wrapper
             .card-header
               h3.h6.card-title.ellipsis
                 | #{construction_name}
+                / | #{construction_started}
             .card-body
               p.ellipsis
                 | #{construction_outline}

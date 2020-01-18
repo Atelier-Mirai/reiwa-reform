@@ -31,7 +31,8 @@ module Resize
         # 画像取得
         img = Magick::ImageList.new(fileName)
         # 新しいサイズへ変更
-        new_img = img.resize_to_fit(800, 532)
+        # new_img = img.resize_to_fit(800, 532) # アスペクト比を保つ
+        new_img = img.resize(800, 532) # アスペクト比無視。
         # 新画像保存
         new_img.write(fileName)
       end
@@ -56,10 +57,8 @@ end
 
 # 降順に並び替え
 directories = directories.sort { |a, b| b <=> a }
-p directories
 
 directories.each do |directory|
   # 個々のディレクトリごとにリサイズ処理を行う
   Resize::resize(directory)
-  # return
 end

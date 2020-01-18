@@ -22,7 +22,7 @@
     / auto;
   li {
     a {
-      padding: 0 0.5rem 0.1rem 0.5rem;
+      padding: 0 0.25rem 0.1rem 0.25rem;
     }
   }
 }
@@ -87,7 +87,7 @@
 .page-nav ul li a {
   // よりクリックしやすくするために
   padding: 0.5rem 0.5rem 0.1rem 0.5rem;
-  margin: 0 1rem;
+  margin: 0 0.5rem;
   text-decoration: none;
   color: $tokiwamidori;
   border-bottom: 1px solid $tokiwamidori;

@@ -98,11 +98,12 @@ module Ikadzuchi
       # す。", :construction_kinds=>"wall", :construction_photo=>"i5.jpg", :construction_directory_name=>"H28-08-31"}
 
       # 工事名を９文字までに、工事概要を４２文字までにし、"…" をつける。
-      info[:construction_name] = nil
-      info[:construction_outline] = nil
+      # info[:construction_name] = nil
+      # info[:construction_outline] = nil
       # info[:construction_photo] = nil
-      info[:construction_name] = Ikadzuchi::clamp(info[:construction_name], 10)
-      info[:construction_outline] = Ikadzuchi::clamp(info[:construction_outline], 42)
+      # info[:construction_name] = Ikadzuchi::clamp(info[:construction_name], 10)
+      # info[:construction_outline] = Ikadzuchi::clamp(info[:construction_outline], 42)
+      
       # サムネイル用slimを追記する
       slim = Ikadzuchi::replace(results_template.body, info)
       Ikadzuchi::append "_results.slim", slim

@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Sort field event binding
   // sortField.addEventListener('change', sort);
+  // sort();
 
   // Filtering
   function filter() {
@@ -61,24 +62,37 @@ document.addEventListener('DOMContentLoaded', function () {
   // Sorting
   function sort() {
     // Do nothing if sort value did not change.
-    var currentSort = sortField.value;
-    if (sortFieldValue === currentSort) {
-      return;
-    }
+    // var currentSort = sortField.value;
+    // if (sortFieldValue === currentSort) {
+    //   return;
+    // }
 
     // If we are changing from "order" sorting to something else
     // let's store the drag order.
-    if (sortFieldValue === 'order') {
-      dragOrder = grid.getItems();
-    }
+    // if (sortFieldValue === 'order') {
+    //   dragOrder = grid.getItems();
+    // }
 
     // Sort the items.
     grid.sort(
-      currentSort === 'title' ? compareItemTitle :
-      currentSort === 'color' ? compareItemColor :
-      dragOrder
+      // currentSort === 'title' ? compareItemTitle :
+      // currentSort === 'color' ? compareItemColor :
+      // dragOrder
+      compareItemStarted
     );
-    sortFieldValue = currentSort;
+    // sortFieldValue = currentSort;
+  }
+
+  // Compare data-started
+  function compareItemStarted(a, b) {
+    var aVal = a.getElement().getAttribute('data-started') || '';
+    var bVal = b.getElement().getAttribute('data-started') || '';
+    console.log(aVal);
+    console.log(bVal);
+    a = aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+    console.log(a);
+    return a;
+    // return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
   }
 
   // Compare data-title
@@ -86,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var aVal = a.getElement().getAttribute(searchAttr) || '';
     var bVal = b.getElement().getAttribute(searchAttr) || '';
     return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
-
   }
 
   // Compare data-color
