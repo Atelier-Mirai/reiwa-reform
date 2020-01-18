@@ -10,6 +10,8 @@ activate :livereload
 set :layout, 'site'
 page 'index.html', layout: 'top'
 
+
+
 # Proxy pages
 # https://middlemanapp.com/advanced/dynamic-pages/
 

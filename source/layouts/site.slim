@@ -22,5 +22,6 @@ html
   body.page
     = partial 'partial/header'
     = partial 'partial/nav'
-    = yield
+    main.page-main
+      = yield
     = partial 'partial/footer'
