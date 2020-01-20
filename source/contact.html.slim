@@ -1,43 +1,81 @@
 main.page-main
   h2.mb-2
     | お問い合わせ
-  p.mb-4
+  p.mb-3
     |　株式会社ホームメイドは、木部外壁の修復、防水塗装を専門に、リフォーム全般にわたる業務を手がけています。
     br
     |『嬉しい』『楽しい』『ありがたい』リフォームを合い言葉に、施主様にやって良かったと喜んでいただける様、日々精進努力しております。
     br
     | 　お気軽にご連絡ください。
 
-  p.text-right.mb-2
-    span.text-error
-      | *
-    | は必須項目です。
+  form.form-horizontal method="post" action="/success.html" netlify="netlify"
+    input.form-input type="hidden" name="Subject" value="Webお問い合わせ"
 
-  form method="post" action="/success.html" netlify="netlify"
-    input.form-input type="hidden" name="Subject" value="Web お問い合わせ"
 
-    label.form-label.required
-      | お問い合わせ内容
-    textarea.form-input name="message" cols="40" rows="12" required=""
-    br
-    label.form-label.required
-      | お名前
-    input.form-input type="text" name="namae" required=""
-    br
-    label.form-label.required
-      | フリガナ
-    input.form-input type="text" name="kana" required=""
-    br
-    label.form-label.required
-      | e-mail
-    input.form-input type="text" name="email" required=""
-    br
-    label.form-label.required
-      | 電話番号(半角)
-    input.form-input type="text" name="tel" required=""
-    br
-    label.form-label
-      | FAX番号(半角)
-    input.form-input type="text" name="fax"
-    br
-    input.form-input.btn.btn-primary type="submit" value="送信"
+    .form-group
+      // お問い合わせ内容
+      .col-2.col-sm-12
+        label.form-label.required.show-mobile
+          | お問い合わせ内容
+        label.form-label.required.text-right.mr-2.hide-mobile
+          | お問い合わせ内容
+      .col-9.col-sm-12.mb-2
+        textarea.form-input name="message" cols="40" rows="12" required=""
+
+      // お名前
+      .col-2.col-sm-12
+        label.form-label.required.show-mobile
+          | お名前
+        label.form-label.required.text-right.mr-2.hide-mobile
+          | お名前
+      .col-9.col-sm-12.mb-2
+        input.form-input type="text" name="namae" required=""
+      / br
+      / label.form-label.required
+      /   | フリガナ
+      / input.form-input type="text" name="kana" required=""
+
+      // メールアドレス
+      .col-2.col-sm-12
+        label.form-label.required.show-mobile
+          | メールアドレス
+        label.form-label.required.text-right.mr-2.hide-mobile
+          | メールアドレス
+      .col-9.col-sm-12.mb-2
+        input.form-input type="text" name="email" required=""
+
+      // 電話番号
+      .col-2.col-sm-12
+        label.form-label.required.show-mobile
+          | 電話番号
+        label.form-label.required.text-right.mr-2.hide-mobile
+          | 電話番号
+      .col-9.col-sm-12.mb-2
+        input.form-input type="text" name="tel" required=""
+
+      // FAX番号
+      .col-2.col-sm-12
+        label.form-label.show-mobile
+          | FAX番号
+        label.form-label.text-right.mr-2.hide-mobile
+          | FAX番号
+      .col-9.col-sm-12.mb-2
+        input.form-input type="text" name="fax"
+
+    // 必須項目注意書き
+    .columns.col-gapless.mb-2
+      .columns.col-12 style="justify-content: flex-end;"
+        p.text-right.mb-0
+          small
+            | (
+          span.text-error
+            | *
+          small
+            | は必須項目です)
+
+  // 送信ボタン
+  .columns.col-gapless
+    column.col-3
+    column.col-6
+      input.form-input.btn.btn-primary type="submit" value="送信"
+    column.col-3
