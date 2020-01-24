@@ -122,20 +122,33 @@ $gen:               #0d0d0d; // 玄(げん)
   border-radius: 3px;
 }
 
+:root {
+  --width-2: calc(calc(100vw - 40px) / 2 - 10px);
+  --width-3: calc(calc(100vw - 40px) / 3 - 10px);
+  --width-4: calc(calc(100vw - 40px) / 4 - 10px);
+  --width-5: calc(calc(100vw - 40px) / 5 - 10px);
+}
+
 .item {
   @media (min-width: 320px) { // 320px(iPhone SE) 以上で二列表示
-    width: calc(calc(100vw - 40px) / 2 - 10px);
+    width: var(--width-2);
+    height: calc(2px + calc(var(--width-2) * 2 / 3) + 30px + 72px + 2px);
   }
   @media (min-width: 628px) { // 三列表示
-    width: calc(calc(100vw - 40px) / 3 - 10px);
+    width: var(--width-3);
+    height: calc(2px + calc(var(--width-3) * 2 / 3) + 30px + 72px + 2px);
   }
   @media (min-width: 824px) { // 四列表示
-    width: calc(calc(100vw - 40px) / 4 - 10px);
+    width: var(--width-4);
+    height: calc(2px + calc(var(--width-4) * 2 / 3) + 30px + 72px + 2px);
   }
   @media (min-width: 1024px) { // 五列表示
-    width: calc(calc(100vw - 40px) / 5 - 10px);
+    width: var(--width-5);
+    height: calc(2px + calc(var(--width-5) * 2 / 3) + 30px + 72px + 2px);
   }
   @media (min-width: 1280px) { // 五列表示(横幅固定)
     width: 238px;
+    height: 263px;
+    // height: calc(2px + calc(238px * 2 / 3) + 30px + 72px + 2px);
   }
 }
