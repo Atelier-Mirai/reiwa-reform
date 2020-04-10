@@ -59,7 +59,7 @@ module Ikadzuchi
         # memoにimageファイル名まで記されているなら、.jpgを付与
         images_with_memo = memo
         images_with_memo.each do |m|
-          m[:image] << ".jpg" unless m[:image].include? ".jpg"
+          m[:image] += ".jpg" unless m[:image].include? ".jpg"
         end
       else
         # 画像ファイル名を取得し、memoと併合する
@@ -103,7 +103,7 @@ module Ikadzuchi
       # info[:construction_photo] = nil
       # info[:construction_name] = Ikadzuchi::clamp(info[:construction_name], 10)
       # info[:construction_outline] = Ikadzuchi::clamp(info[:construction_outline], 42)
-      
+
       # サムネイル用slimを追記する
       slim = Ikadzuchi::replace(results_template.body, info)
       Ikadzuchi::append "_results.slim", slim
