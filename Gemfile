@@ -1,15 +1,14 @@
 source 'https://rubygems.org'
 
-# 静的サイトジェネレータ middleman
+# 静的サイトジェネレータ Middleman
 gem 'middleman'
-# ベンダープリフィックス 自動付与
+# ベンダープリフィックス 自動付与する
 gem 'middleman-autoprefixer'
-# ファイル変更時に、ブラウザ再読み込み
+# ファイル更新の際、ブラウザを再読み込みする
 gem 'middleman-livereload'
-# テンプレートエンジンはslimを用いる
+# テンプレートエンジンはSlimを使用する
 gem 'slim'
-
-# イメージ圧縮
-gem "middleman-imageoptim", git: "https://github.com/plasticine/middleman-imageoptim", branch: "master"
-# html 圧縮
+# イメージ圧縮を行う
+gem "middleman-imageoptim"
+# HTML圧縮を行う
 gem "middleman-minify-html"
