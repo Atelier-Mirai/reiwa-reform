@@ -3,6 +3,7 @@ activate :livereload
 
 # 相対URLを使う
 activate :relative_assets
+set :relative_links, true
 
 # ベンダープリフィックス付与
 activate :autoprefixer do |prefix|

@@ -30,6 +30,10 @@ module Resize
       files.each do |fileName|
         # 画像取得
         img = Magick::ImageList.new(fileName)
+
+        # すでにリサイズ済みなら、次の画像ファイルへ
+        next if img.columns == 800 && img.rows == 532
+
         # 新しいサイズへ変更
         # new_img = img.resize_to_fit(800, 532) # アスペクト比を保つ
         new_img = img.resize(800, 532) # アスペクト比無視。
