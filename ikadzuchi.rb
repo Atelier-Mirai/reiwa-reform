@@ -40,9 +40,13 @@ module Ikadzuchi
       end
     end
 
+
+
+    ################################################################################
     # 工事名ディレクトリにある画像(.jpg)と、memo.csvを雛形にslimファイルを生成する
     # @param [String] construction_name 工事名称
     # @return "#{construction_name}.slim" ファイルが生成される
+    ################################################################################
     def generate(construction_directory_name)
       # 雛形ファイルを読み込む
       photos_template = Ikadzuchi::template("_photos_template.txt", pagination: true)
@@ -75,10 +79,6 @@ module Ikadzuchi
       images_with_memo.each do |m|
         m[:image] = "#{construction_directory_name}/#{m[:image]}"
       end
-      # images_with_memo # =>
-      # [{:image=>"R01-11-26/ot01.jpg", :caption=>"高圧洗浄", :comment=>""},
-      #  {:image=>"R01-11-26/ot02.jpg", :caption=>"外壁の高圧洗浄", :comment=>""},
-      #  {:image=>"R01-11-26/ot03.jpg", :caption=>"屋根の現状1", :comment=>""}]
 
       # 頁を付与
       slim = Ikadzuchi::replace_with_pagination(photos_template, info, images_with_memo, 12)
@@ -92,28 +92,20 @@ module Ikadzuchi
       # 施工事例 一覧の生成
       results_template = Ikadzuchi::template("_results_template.txt", pagination: false)
 
-      # p info =>
-      # {:construction_name=>"木部外壁塗装工事", :construction_started=>"H28-08-31", :construction_ended=>"H28-08-31", :construction_period=>"H28-08-31 〜 H28-08-31", :construction_outline=>"木部
-      # 外壁塗装の施工手順です。現場調査を行い、足場を組みます。高圧洗浄（水洗い）後に、専用洗浄液による色抜きを行います。風雨に晒され、傷んでいた外壁でしたが、元の美しい木肌を取り戻し、輝いていま
-      # す。", :construction_kinds=>"wall", :construction_photo=>"i5.jpg", :construction_directory_name=>"H28-08-31"}
-
-      # 工事名を９文字までに、工事概要を４２文字までにし、"…" をつける。
-      # info[:construction_name] = nil
-      # info[:construction_outline] = nil
-      # info[:construction_photo] = nil
-      # info[:construction_name] = Ikadzuchi::clamp(info[:construction_name], 10)
-      # info[:construction_outline] = Ikadzuchi::clamp(info[:construction_outline], 42)
-
       # サムネイル用slimを追記する
       slim = Ikadzuchi::replace(results_template.body, info)
       Ikadzuchi::append "_results.slim", slim
     end
 
+
+
+    ################################################################################
     # ページネーションを出力する
     # « ‹ 8 9 10 11 12 13 14 › »
     # @params [Integer] current_page: 現在の頁数
     # @params [Integer] total_pages:  総頁数
     # @params [Integer] window:       前後にいくつの頁を表示させるか？
+    ################################################################################
     def pagination(current_page:, total_pages:, window: 3)
       # 一頁しかないなら、ページネーション不要
       return "" if current_page == 1 && total_pages == 1
@@ -147,25 +139,34 @@ module Ikadzuchi
       "\n  .pagination\n" << pagination.split("\n").map { |line| "    #{line}" }.join("\n") << "\n\n"
     end
 
+
+    ################################################################################
     # 指定されたディレクトリ内の画像ファイル名を返す
     # @param [String] directory 画像ファイルの置かれているディレクトリ名
     # @return [Array] 画像ファイル名
+    ################################################################################
     def images(directory)
       # 画像ファイル名を取得
       Dir.glob("#{directory}/*.jpg").map { |f| File.split(f)[1] }.sort
       # Dir.glob("*.jpg").sort.map { |f| File.split(f)[1] }.sort
     end
 
+
+    ################################################################################
     # 指定された雛形を読み込む
     # @param [String] filename 雛形ファイル名
     # @return [Template] シングルトン
+    ################################################################################
     def template(filename, pagination)
       Template.read(filename, pagination)
     end
 
+
+    ################################################################################
     # 指定された備忘録を読み込む
     # @param [String] filanem 備忘録のファイル名
     # @return [Array] 読み込んだ備忘録
+    ################################################################################
     def memo(filename)
       # カラム名の読み込み
       column_names = []
@@ -192,9 +193,12 @@ module Ikadzuchi
       array
     end
 
+
+    ################################################################################
     # 指定された工事情報を読み込む
     # @param [String] filanem 工事情報のファイル名
     # @return [Hash] 読み込んだ工事情報
+    ################################################################################
     def info(filename)
       hash = {
         construction_name:    "",
@@ -253,10 +257,13 @@ module Ikadzuchi
       hash
     end
 
+
+    ################################################################################
     # 雛形を置換する
     # @param [String] template 雛形
     # @param [String] hash 置換用 key/value
     # @return [String] 置換後のtemplate
+    ################################################################################
     def replace(template, hash)
       hash&.each do |key, value|
         template = template.gsub("\#{#{key}}", value.to_s)
@@ -264,11 +271,15 @@ module Ikadzuchi
       template
     end
 
+
+    ################################################################################
     # 雛形を置換する
-    # @param [String] template 雛形
-    # @param [String] array 置換用 key/value hashの配列
-    # @param [Integer] per_page  一頁に何枚の写真を表示させるか
-    # @return [String] 置換後のtemplate
+    # @param  [String]  template 雛形
+    # @param  [Hash]    info 工事情報
+    # @param  [String]  array 置換用 key/value hashの配列
+    # @param  [Integer] per_page  一頁に何枚の写真を表示させるか
+    # @return [String]  置換後のtemplate
+    ################################################################################
     def replace_with_pagination(template, info, images_with_memo, per_page = 12)
       current_page = 1
       total_pages = (images_with_memo.count / per_page.to_f).ceil
@@ -298,28 +309,39 @@ module Ikadzuchi
       if per_page * total_pages != images_with_memo.count
         slim << pagination(current_page: current_page, total_pages: total_pages)
       end
+      # slim << "h1 #{info[:construction_name]}\n"
+      # slim << "h1 #{info[:construction_directory_name]}"
       slim
     end
 
+
+    ################################################################################
     # ファイルを出力する
     # @params [String] filename
     # @params [String] text
+    ################################################################################
     def write(filename, text)
       File.write filename, text
     end
 
+
+    ################################################################################
     # ファイルに追記する
     # @params [String] filename
     # @params [String] text
+    ################################################################################
     def append(filename, text)
       File.open(filename, "a") do |f|
         f.puts text
       end
     end
 
+
+    ################################################################################
     # 文字数制限を行う
     # @params [String] text
     # @params [Integer] limit
+    ################################################################################
     def clamp(text, limit)
       return if text.nil?
       if text.size >= limit
@@ -330,6 +352,14 @@ module Ikadzuchi
   end
 end
 
+
+
+
+################################################################################
+#
+# シングルトンクラスの実装
+#
+################################################################################
 require 'singleton'
 class Template
   include Singleton

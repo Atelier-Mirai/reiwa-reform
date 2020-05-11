@@ -272,7 +272,7 @@
     return typeof val === strFunction;
   }
 
-  // var transformStyle$1 = 'transform';
+  var transformStyle$1 = 'transform';
 
   /**
    * Set inline styles to an element.
@@ -282,7 +282,7 @@
    */
   function setStyles(element, styles) {
     for (var prop in styles) {
-      // element.style[prop === transformStyle$1 ? transformProp : prop] = styles[prop];
+      element.style[prop === transformStyle$1 ? transformProp : prop] = styles[prop];
     }
   }
 
@@ -417,7 +417,7 @@
       for (i = 0; i < currentProps.length; i++) {
         propName = currentProps[i];
         propValue = getStyle(element, getStyleName(propName));
-        // element.style[propName === 'transform' ? transformProp : propName] = propValue;
+        element.style[propName === 'transform' ? transformProp : propName] = propValue;
       }
     } else {
       setStyles(element, styles);
@@ -1501,14 +1501,13 @@
    * @returns {Boolean}
    */
   function isTransformed(element) {
-    return false;
-    // var transform = getStyle(element, 'transform');
-    // if (!transform || transform === 'none') return false;
-    //
-    // var display = getStyle(element, 'display');
-    // if (display === 'inline' || display === 'none') return false;
-    //
-    // return true;
+    var transform = getStyle(element, 'transform');
+    if (!transform || transform === 'none') return false;
+
+    var display = getStyle(element, 'display');
+    if (display === 'inline' || display === 'none') return false;
+
+    return true;
   }
 
   /**
@@ -1530,9 +1529,9 @@
     // document. https://github.com/niklasramo/mezr/blob/0.6.1/mezr.js#L339
     var document = window.document;
     var ret = (includeSelf ? element : element.parentElement) || document;
-    // while (ret && ret !== document && getStyle(ret, 'position') === 'static' && !isTransformed(ret)) {
-    //   ret = ret.parentElement || document;
-    // }
+    while (ret && ret !== document && getStyle(ret, 'position') === 'static' && !isTransformed(ret)) {
+      ret = ret.parentElement || document;
+    }
     return ret;
   }
 
@@ -1691,7 +1690,7 @@
   }
 
   var translateValue = {};
-  // var transformStyle$2 = 'transform';
+  var transformStyle$2 = 'transform';
   var transformNone = 'none';
   var rxMat3d = /^matrix3d/;
   var rxMatTx = /([^,]*,){4}/;
@@ -1710,18 +1709,18 @@
     translateValue.x = 0;
     translateValue.y = 0;
 
-    // var transform = getStyle(element, transformStyle$2);
-    // if (!transform || transform === transformNone) {
-    //   return translateValue;
-    // }
+    var transform = getStyle(element, transformStyle$2);
+    if (!transform || transform === transformNone) {
+      return translateValue;
+    }
 
     // Transform style can be in either matrix3d(...) or matrix(...).
-    // var isMat3d = rxMat3d.test(transform);
-    // var tX = transform.replace(isMat3d ? rxMat3dTx : rxMatTx, '');
-    // var tY = tX.replace(rxNextItem, '');
-    //
-    // translateValue.x = parseFloat(tX) || 0;
-    // translateValue.y = parseFloat(tY) || 0;
+    var isMat3d = rxMat3d.test(transform);
+    var tX = transform.replace(isMat3d ? rxMat3dTx : rxMatTx, '');
+    var tY = tX.replace(rxNextItem, '');
+
+    translateValue.x = parseFloat(tX) || 0;
+    translateValue.y = parseFloat(tY) || 0;
 
     return translateValue;
   }
@@ -2078,10 +2077,10 @@
 
     // Append item element to the container if it's not it's child. Also make
     // sure the translate values are adjusted to account for the DOM shift.
-    // if (element.parentNode !== grid._element) {
-    //   grid._element.appendChild(element);
-    //   element.style[transformProp] = getTranslateString(this._gridX, this._gridY);
-    // }
+    if (element.parentNode !== grid._element) {
+      grid._element.appendChild(element);
+      element.style[transformProp] = getTranslateString(this._gridX, this._gridY);
+    }
 
     // Remove dragging class.
     removeClass(element, grid._settings.itemDraggingClass);
@@ -2620,7 +2619,7 @@
     // Adjust the position of the item element if it was moved from a container
     // to another.
     if (targetContainer !== currentContainer) {
-      // element.style[transformProp] = getTranslateString(translate.x, translate.y);
+      element.style[transformProp] = getTranslateString(translate.x, translate.y);
     }
 
     // Update child element's styles to reflect the current visibility state.
@@ -2724,14 +2723,14 @@
 
     // Stop current positioning animation.
     if (item.isPositioning()) {
-      // item._layout.stop(true, { transform: getTranslateString(currentLeft, currentTop) });
+      item._layout.stop(true, { transform: getTranslateString(currentLeft, currentTop) });
     }
 
     // Stop current migration animation.
     if (migrate._isActive) {
       currentLeft -= migrate._containerDiffX;
       currentTop -= migrate._containerDiffY;
-      // migrate.stop(true, { transform: getTranslateString(currentLeft, currentTop) });
+      migrate.stop(true, { transform: getTranslateString(currentLeft, currentTop) });
     }
 
     // If item is being released reset release data.
@@ -2776,7 +2775,7 @@
         this._left = currentLeft + this._containerDiffX;
         this._top = currentTop + this._containerDiffY;
         dragContainer.appendChild(element);
-        // element.style[transformProp] = getTranslateString(this._left, this._top);
+        element.style[transformProp] = getTranslateString(this._left, this._top);
       }
     }
 
@@ -2861,7 +2860,7 @@
     if (!item._isActive) return;
 
     // Update element's translateX/Y values.
-    // item._element.style[transformProp] = getTranslateString(this._left, this._top);
+    item._element.style[transformProp] = getTranslateString(this._left, this._top);
 
     // Emit dragMove event.
     this._getGrid()._emit(eventDragMove, item, this._dragEvent);
@@ -2950,7 +2949,7 @@
     if (!item._isActive) return;
 
     // Update element's translateX/Y values.
-    // item._element.style[transformProp] = getTranslateString(this._left, this._top);
+    item._element.style[transformProp] = getTranslateString(this._left, this._top);
 
     // Emit dragScroll event.
     this._getGrid()._emit(eventDragScroll, item, this._scrollEvent);
@@ -3128,7 +3127,7 @@
       cancelPlaceholderTick(item._id);
 
       // Snap placeholder to correct position.
-      // var targetStyles = { transform: getTranslateString(nextLeft, nextTop) };
+      var targetStyles = { transform: getTranslateString(nextLeft, nextTop) };
       if (this._animate.isAnimating()) {
         this._animate.stop(targetStyles);
       } else {
@@ -3179,7 +3178,7 @@
     var currentTop = this._currentTop;
     var nextLeft = this._nextLeft;
     var nextTop = this._nextTop;
-    // var targetStyles = { transform: getTranslateString(nextLeft, nextTop) };
+    var targetStyles = { transform: getTranslateString(nextLeft, nextTop) };
 
     // If placeholder is already in correct position let's just stop animation
     // and be done with it.
@@ -3190,7 +3189,7 @@
 
     // Otherwise let's start the animation.
     var settings = this._item.getGrid()._settings.dragPlaceholder;
-    // var currentStyles = { transform: getTranslateString(currentLeft, currentTop) };
+    var currentStyles = { transform: getTranslateString(currentLeft, currentTop) };
     animation.start(currentStyles, targetStyles, {
       duration: settings.duration,
       easing: settings.easing,
@@ -3314,12 +3313,12 @@
     var top = item._top + item._marginTop;
     setStyles(element, {
       display: 'block',
-      // position: 'absolute',
-      // left: '0',
-      // top: '0',
-      // width: item._width + 'px',
-      // height: item._height + 'px',
-      // transform: getTranslateString(left, top)
+      position: 'absolute',
+      left: '0',
+      top: '0',
+      width: item._width + 'px',
+      height: item._height + 'px',
+      transform: getTranslateString(left, top)
     });
 
     // Bind event listeners.
@@ -3688,10 +3687,10 @@
    */
   ItemLayout.prototype._updateTargetStyles = function() {
     if (this._isDestroyed) return;
-    // this._targetStyles.transform = getTranslateString(
-    //   this._item._left + this._offsetLeft,
-    //   this._item._top + this._offsetTop
-    // );
+    this._targetStyles.transform = getTranslateString(
+      this._item._left + this._offsetLeft,
+      this._item._top + this._offsetTop
+    );
   };
 
   /**
@@ -3764,7 +3763,7 @@
     }
 
     // Get current styles for animation.
-    // this._currentStyles.transform = getTranslateString(this._currentLeft, this._currentTop);
+    this._currentStyles.transform = getTranslateString(this._currentLeft, this._currentTop);
 
     // Animate.
     item._animate.start(this._currentStyles, this._targetStyles, this._animateOptions);
@@ -3844,21 +3843,21 @@
 
     // Abort current positioning.
     if (item.isPositioning()) {
-      // item._layout.stop(true, { transform: getTranslateString(translateX, translateY) });
+      item._layout.stop(true, { transform: getTranslateString(translateX, translateY) });
     }
 
     // Abort current migration.
     if (this._isActive) {
       translateX -= this._containerDiffX;
       translateY -= this._containerDiffY;
-      // this.stop(true, { transform: getTranslateString(translateX, translateY) });
+      this.stop(true, { transform: getTranslateString(translateX, translateY) });
     }
 
     // Abort current release.
     if (item.isReleasing()) {
       translateX -= item._release._containerDiffX;
       translateY -= item._release._containerDiffY;
-      // item._release.stop(true, { transform: getTranslateString(translateX, translateY) });
+      item._release.stop(true, { transform: getTranslateString(translateX, translateY) });
     }
 
     // Stop current visibility animations.
@@ -3916,15 +3915,15 @@
     if (targetContainer !== currentContainer) {
       targetContainer.appendChild(element);
       offsetDiff = getOffsetDiff(targetContainer, currentContainer, true);
-      // if (!translate) {
-      //   translate = getTranslate(element);
-      //   translateX = translate.x;
-      //   translateY = translate.y;
-      // }
-      // element.style[transformProp] = getTranslateString(
-      //   translateX + offsetDiff.left,
-      //   translateY + offsetDiff.top
-      // );
+      if (!translate) {
+        translate = getTranslate(element);
+        translateX = translate.x;
+        translateY = translate.y;
+      }
+      element.style[transformProp] = getTranslateString(
+        translateX + offsetDiff.left,
+        translateY + offsetDiff.top
+      );
     }
 
     // Update child element's styles to reflect the current visibility state.
@@ -3998,16 +3997,16 @@
 
     if (this._container !== gridElement) {
       if (!currentStyles) {
-        // if (abort) {
-        //   translate = getTranslate(element);
-        //   tempStyles.transform = getTranslateString(
-        //     translate.x - this._containerDiffX,
-        //     translate.y - this._containerDiffY
-        //   );
-        // } else {
-        //   tempStyles.transform = getTranslateString(item._left, item._top);
-        // }
-        // currentStyles = tempStyles;
+        if (abort) {
+          translate = getTranslate(element);
+          tempStyles.transform = getTranslateString(
+            translate.x - this._containerDiffX,
+            translate.y - this._containerDiffY
+          );
+        } else {
+          tempStyles.transform = getTranslateString(item._left, item._top);
+        }
+        currentStyles = tempStyles;
       }
       gridElement.appendChild(element);
       setStyles(element, currentStyles);
@@ -4894,9 +4893,9 @@
     // Reset layout data.
     layout.slots = slots ? slots : this._slots;
     layout.width = isHorizontal ? 0 : rounding ? Math.round(width) : width;
-    // layout.height = !isHorizontal ? 0 : rounding ? Math.round(height) : height;
+    layout.height = !isHorizontal ? 0 : rounding ? Math.round(height) : height;
     layout.setWidth = isHorizontal;
-    // layout.setHeight = !isHorizontal;
+    layout.setHeight = !isHorizontal;
 
     // Make sure slots and slot size arrays are reset.
     layout.slots.length = 0;

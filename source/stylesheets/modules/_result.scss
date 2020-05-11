@@ -2,20 +2,19 @@
 # 工事関係
 --------------------------------------------------------------*/
 .work_figure {
-  width: 100%;
-  /* ##### 画面の横幅568ピクセル以上 ##### */
-  @media (min-width: 568px) {
-    width: 75%;
-  }
-  margin: auto;
+  display: grid;
+  justify-content: center;
   margin-bottom: 1.5rem;
   img {
     width: 100%;
-    margin: 0 auto;
-    padding-left: 0%;
+    max-width: 640px;
+  }
+  p {
+    text-align:left;
+    padding-left: 30%;
     /* ##### 画面の横幅568ピクセル以上 ##### */
     @media (min-width: 568px) {
-      padding-left: 20%;
+      padding-left: 50%;
     }
   }
 }

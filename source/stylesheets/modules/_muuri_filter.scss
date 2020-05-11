@@ -5,6 +5,27 @@ $konjiki:           #e6b422; // 金色(こんじき)
 $shinryokushoku:    #339933; // 新緑色(しんりょくしょく)
 $gen:               #0d0d0d; // 玄(げん)
 
+.grid-wrapper {
+  max-width: 1240px;
+  width: calc(100vw - 20px);
+
+  .grid {
+    width: calc(100vw - 20px);
+    max-width: 100%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    @media (min-width: 628px) { // 三列表示
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    @media (min-width: 1280px) { // 五列表示(横幅固定)
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    grid-gap: 10px;
+  }
+}
+
 .custom-content {
   .card {
     border: none;
@@ -12,8 +33,6 @@ $gen:               #0d0d0d; // 玄(げん)
       .img-responsive {
         display: block;
         height: auto;
-        // max-width: 100%;
-        // width: 200px;
       }
     }
     .card-header {
@@ -23,13 +42,14 @@ $gen:               #0d0d0d; // 玄(げん)
         padding: 0;
         line-height: 1.2;
         font-size: 0.85rem;
-        overflow: hidden;
+
         text-overflow: ellipsis;
-        whte-space: nowrap;
+        // white-space: nowrap;
+        overflow: hidden;
+
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
-        overflow: hidden;
       }
     }
     .card-body {
@@ -43,7 +63,7 @@ $gen:               #0d0d0d; // 玄(げん)
         margin: 0;
         text-align: left;
         font-size: 0.77rem;
-        line-height: 1.23;
+        // line-height: 1.23;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 4;
@@ -53,102 +73,92 @@ $gen:               #0d0d0d; // 玄(げん)
   }
 }
 
-.grid-wrapper {
-  max-width: 1240px;
-  width: calc(100vw - 40px);
-}
-
-.grid {
-  position: relative;
-  width: calc(100vw - 40px);
-  max-width: 100%;
-  margin: 0 auto;
-}
 
 .item {
-  position: absolute;
-  margin: 5px;
-  z-index: 1;
-  transition: transform .6s ease;
-  cursor: pointer;
-  color: $gen;
+  // position: absolute;
+  // margin: 5px;
+  // z-index: 1;
+  // transition: transform .6s ease;
+  // cursor: pointer;
+  // color: $gen;
 
   &.renovation {
     .custom-content {
-      border-color: $konjiki;
+      border: 1px solid $konjiki;
+
       background-color: lighten($konjiki, 30%);
     }
   }
   &.easily {
     .custom-content {
-      border-color: $shinryokushoku;
+      border: 1px solid $shinryokushoku;
       background-color: lighten($shinryokushoku, 50%);
     }
   }
 
   &.restore {
     .custom-content {
-      border-color: $shusha;
+      border: 1px solid $shusha;
       background-color: lighten($shusha, 40%);
     }
   }
 
   &.tile {
     .custom-content {
-      border-color: $konpeki;
+      border: 1px solid $konpeki;
       background-color: lighten($konpeki, 50%);
     }
   }
 
   &.wall {
     .custom-content {
-      border-color: darken($nanowanairo, 10%);
+      border: 1px solid darken($nanowanairo, 10%);
       background-color: lighten($nanowanairo, 25%);
     }
   }
 }
 
-.item-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display:table;
-}
-.custom-content {
-  display: table-cell;
-  text-align: center;
-  color: #666;
-  border: 2px solid;
-  border-radius: 3px;
-}
+// .item-content {
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   display:table;
+// }
+// .custom-content {
+  // display: table-cell;
+  // text-align: center;
+  // color: #666;
+  // border: 2px solid;
+  // border-radius: 3px;
+// }
 
-:root {
-  --width-2: calc(calc(100vw - 40px) / 2 - 10px);
-  --width-3: calc(calc(100vw - 40px) / 3 - 10px);
-  --width-4: calc(calc(100vw - 40px) / 4 - 10px);
-  --width-5: calc(calc(100vw - 40px) / 5 - 10px);
-}
+// :root {
+//   --width-2: calc(calc(100vw - 40px) / 2 - 10px);
+//   --width-3: calc(calc(100vw - 40px) / 3 - 10px);
+//   --width-4: calc(calc(100vw - 40px) / 4 - 10px);
+//   --width-5: calc(calc(100vw - 40px) / 5 - 10px);
+// }
 
-.item {
-  @media (min-width: 320px) { // 320px(iPhone SE) 以上で二列表示
-    width: var(--width-2);
-    height: calc(2px + calc(var(--width-2) * 2 / 3) + 30px + 72px + 2px);
-  }
-  @media (min-width: 628px) { // 三列表示
-    width: var(--width-3);
-    height: calc(2px + calc(var(--width-3) * 2 / 3) + 30px + 72px + 2px);
-  }
-  @media (min-width: 824px) { // 四列表示
-    width: var(--width-4);
-    height: calc(2px + calc(var(--width-4) * 2 / 3) + 30px + 72px + 2px);
-  }
-  @media (min-width: 1024px) { // 五列表示
-    width: var(--width-5);
-    height: calc(2px + calc(var(--width-5) * 2 / 3) + 30px + 72px + 2px);
-  }
-  @media (min-width: 1280px) { // 五列表示(横幅固定)
-    width: 238px;
-    height: 263px;
-    // height: calc(2px + calc(238px * 2 / 3) + 30px + 72px + 2px);
-  }
-}
+// .item {
+//   @media (min-width: 320px) { // 320px(iPhone SE) 以上で二列表示
+//     width: var(--width-2) !important;
+//     height: calc(2px + calc(var(--width-2) * 2 / 3) + 30px + 72px + 2px) !important;
+//   }
+//   @media (min-width: 628px) { // 三列表示
+//     width: var(--width-3) !important;
+//     height: calc(2px + calc(var(--width-3) * 2 / 3) + 30px + 72px + 2px) !important;
+//   }
+//   @media (min-width: 824px) { // 四列表示
+//     width: var(--width-4) !important;
+//     height: calc(2px + calc(var(--width-4) * 2 / 3) + 30px + 72px + 2px) !important;
+//   }
+//   @media (min-width: 1024px) { // 五列表示
+//     width: var(--width-5) !important;
+//     height: calc(2px + calc(var(--width-5) * 2 / 3) + 30px + 72px + 2px) !important;
+//   }
+//   @media (min-width: 1280px) { // 五列表示(横幅固定)
+//     width: 238px !important;
+//     height: 263px !important;
+//     // height: calc(2px + calc(238px * 2 / 3) + 30px + 72px + 2px);
+//   }
+// }
