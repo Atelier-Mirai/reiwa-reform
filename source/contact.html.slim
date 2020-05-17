@@ -8,8 +8,10 @@ main.page-main
     br
     | 　お気軽にご連絡ください。
 
-  form.form-horizontal method="post" action="./success.html" netlify="netlify"
+  form.form-horizontal method="post" action='./success.html' netlify="netlify"
     input.form-input type="hidden" name="Subject" value="Webお問い合わせ"
+    // 参照元URL
+    input#divA type="hidden" name="referrer_url"
 
     .form-group
       // お問い合わせ内容
@@ -19,7 +21,7 @@ main.page-main
         label.form-label.required.text-right.mr-2.hide-mobile
           | お問い合わせ内容
       .col-9.col-sm-12.mb-2
-        textarea.form-input name="message" cols="40" rows="12" required=""
+        textarea.form-input name="message" autocorrect="off" autocapitalize="off" cols="40" rows="12" required=""
 
       // お名前
       .col-2.col-sm-12
@@ -28,7 +30,7 @@ main.page-main
         label.form-label.required.text-right.mr-2.hide-mobile
           | お名前
       .col-9.col-sm-12.mb-2
-        input.form-input type="text" name="name" required=""
+        input.form-input type="text" name="name" autocomplete="name" required=""
 
       // メールアドレス
       .col-2.col-sm-12
@@ -37,7 +39,7 @@ main.page-main
         label.form-label.required.text-right.mr-2.hide-mobile
           | メールアドレス
       .col-9.col-sm-12.mb-2
-        input.form-input type="text" name="email" required=""
+        input.form-input type="email" name="email" autocomplete="email" required=""
 
       // 電話番号
       .col-2.col-sm-12
@@ -46,7 +48,7 @@ main.page-main
         label.form-label.required.text-right.mr-2.hide-mobile
           | 電話番号
       .col-9.col-sm-12.mb-2
-        input.form-input type="text" name="tel" required=""
+        input.form-input type="tel" name="tel" autocomplete="tel" required=""
 
       // FAX番号
       .col-2.col-sm-12
@@ -57,8 +59,13 @@ main.page-main
       .col-9.col-sm-12.mb-2
         input.form-input type="text" name="fax"
 
-      // 参照元URL
-      input#divA type="hidden" name="referrer_url"
+
+    // 送信ボタン
+    .columns.col-gapless
+      column.col-3
+      column.col-6
+        input.form-input.btn.btn-primary type="submit" value="送信"
+      column.col-3
 
     // 必須項目注意書き
     .columns.col-gapless.mb-2
@@ -71,12 +78,6 @@ main.page-main
           small
             | は必須項目です)
 
-  // 送信ボタン
-  .columns.col-gapless
-    column.col-3
-    column.col-6
-      input.form-input.btn.btn-primary type="submit" value="送信"
-    column.col-3
 
 javascript:
   const referrer = document.referrer;
@@ -84,3 +85,9 @@ javascript:
   // let text = document.getElementById('divA').textContent;
   // console.log('text', text);
   document.getElementById('divA').innerText = referrer;
+
+  window.addEventListener("beforeunload", function(e){
+    let confirmation_message = "入力内容を破棄します";
+    e.return_value = confirmation_message;
+    return confirmation_message;
+  });
