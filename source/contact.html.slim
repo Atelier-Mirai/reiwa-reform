@@ -8,9 +8,8 @@ main.page-main
     br
     | 　お気軽にご連絡ください。
 
-  form.form-horizontal method="post" action="/success.html" netlify="netlify"
+  form.form-horizontal method="post" action="./success.html" netlify="netlify"
     input.form-input type="hidden" name="Subject" value="Webお問い合わせ"
-
 
     .form-group
       // お問い合わせ内容
@@ -29,11 +28,7 @@ main.page-main
         label.form-label.required.text-right.mr-2.hide-mobile
           | お名前
       .col-9.col-sm-12.mb-2
-        input.form-input type="text" name="namae" required=""
-      / br
-      / label.form-label.required
-      /   | フリガナ
-      / input.form-input type="text" name="kana" required=""
+        input.form-input type="text" name="name" required=""
 
       // メールアドレス
       .col-2.col-sm-12
