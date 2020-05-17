@@ -62,6 +62,9 @@ main.page-main
       .col-9.col-sm-12.mb-2
         input.form-input type="text" name="fax"
 
+      // 参照元URL
+      input#divA type="hidden" name="referrer_url"
+
     // 必須項目注意書き
     .columns.col-gapless.mb-2
       .columns.col-12 style="justify-content: flex-end;"
@@ -79,3 +82,10 @@ main.page-main
     column.col-6
       input.form-input.btn.btn-primary type="submit" value="送信"
     column.col-3
+
+javascript:
+  const referrer = document.referrer;
+  console.log(document.referrer);
+  // let text = document.getElementById('divA').textContent;
+  // console.log('text', text);
+  document.getElementById('divA').innerText = referrer;
