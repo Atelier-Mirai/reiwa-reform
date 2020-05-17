@@ -11,7 +11,7 @@ main.page-main
   form.form-horizontal method="post" action='./success.html' netlify="netlify"
     input.form-input type="hidden" name="Subject" value="Webお問い合わせ"
     // 参照元URL
-    input#divA type="hidden" name="referrer_url"
+    input#referrer_url type="hidden" name="referrer_url"
 
     .form-group
       // お問い合わせ内容
@@ -81,10 +81,7 @@ main.page-main
 
 javascript:
   const referrer = document.referrer;
-  console.log(document.referrer);
-  // let text = document.getElementById('divA').textContent;
-  // console.log('text', text);
-  document.getElementById('divA').innerText = referrer;
+  document.getElementById('referrer_url').value = referrer;
 
   window.addEventListener("beforeunload", function(e){
     let confirmation_message = "入力内容を破棄します";
