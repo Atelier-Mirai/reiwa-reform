@@ -1,0 +1,47 @@
+/*=============================================================================
+  foundation
+  リセットCSS、NormarizeCSSなどの、すべてのベースとなるCSS
+=============================================================================*/
+
+/*
+  modern-css-reset.css
+-----------------------------------------------------------------------------*/
+@import 'modern-css-reset';
+
+/*
+  spectre css
+-----------------------------------------------------------------------------*/
+@import 'spectre';
+
+/*
+  レスポンシブな文字サイズ 今すぐ使えるCSSレシピブック 96頁より
+-----------------------------------------------------------------------------*/
+html {
+  font-size: 14px;
+  @media (min-width: 320px) {
+    font-size: calc( (18 - 14) * ((100vw - 320px) / (960 - 320)) + 14px);
+  }
+  @media (min-width: 960px) {
+    font-size: 18px;
+  }
+}
+
+/*
+  2020年に最適なfont-familyの書き方
+  https://ics.media/entry/200317/
+-----------------------------------------------------------------------------*/
+// M PLUS 1p
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
+
+// font-family
+$font-family: "M PLUS 1p",
+              "Helvetica Neue",
+              Arial,
+              "Hiragino Kaku Gothic ProN",
+              "Hiragino Sans",
+              Meiryo,
+              sans-serif;
+
+html {
+  font-family: $font-family !important;
+}

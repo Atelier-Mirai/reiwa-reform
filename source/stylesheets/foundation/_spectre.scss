@@ -9,17 +9,6 @@ html {
 
   /* 1 */
   -webkit-text-size-adjust: 100%;
-
-
-  /* レスポンシブな文字サイズ */
-  /* 今すぐ使えるCSSレシピブック 96より */
-  font-size: 14px;
-  @media (min-width: 320px) {
-    font-size: calc( (18 - 14) * ((100vw - 320px) / (960 - 320)) + 14px);
-  }
-  @media (min-width: 960px) {
-    font-size: 18px;
-  }
 }
 
 /* Sections ========================================================================== */

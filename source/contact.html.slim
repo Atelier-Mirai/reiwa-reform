@@ -64,7 +64,7 @@ main.page-main
     .columns.col-gapless
       column.col-3
       column.col-6
-        input.form-input.btn.btn-primary type="submit" value="送信"
+        input#submit.form-input.btn.btn-primary type="submit" value="送信"
       column.col-3
 
     // 必須項目注意書き
@@ -80,11 +80,16 @@ main.page-main
 
 
 javascript:
-  const referrer = document.referrer;
-  document.getElementById('referrer_url').value = referrer;
+  // 参照元URLをセット
+  document.getElementById("referrer_url").value = document.referrer;
 
-  window.addEventListener("beforeunload", function(e){
-    let confirmation_message = "入力内容を破棄します";
-    e.return_value = confirmation_message;
-    return confirmation_message;
+  // フォーム送信前にタブを閉じる際に、離脱アラートを表示する。
+  window.addEventListener("beforeunload", (event) => {
+    event.preventDefault();
+    event.returnValue = "入力内容を破棄します";
+  });
+
+  // submit ボタンが押されたときには、離脱アラートを表示しない。
+  document.getElementById('submit').addEventListener('click', () => {
+    window.removeEventListener('beforeunload');
   });
