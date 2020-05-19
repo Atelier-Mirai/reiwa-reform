@@ -46,6 +46,9 @@
   }
   &:hover {
     background: $fukamidori;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
   }
 }
 

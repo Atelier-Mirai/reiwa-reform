@@ -50,11 +50,27 @@ function fixed_footer() {
   });
 }
 
+function fixed_construction_name() {
+  $(window).scroll(function() {
+    var currentPos = $(this).scrollTop();
+    var triggerPos = 215;
+    var fixed_construction_name = $('.construction.name');
+
+    if (currentPos > triggerPos) {
+      fixed_construction_name.addClass('active');
+    } else {
+      fixed_construction_name.removeClass('active');
+    }
+  });
+}
+
 (function($) {
 
   $(function() {
     sp_menu();
     fixed_footer();
+
+    fixed_construction_name();
 
     // 先頭へ戻る
     var $pagetop = $(".pagetop");

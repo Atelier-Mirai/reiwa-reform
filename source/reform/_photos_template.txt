@@ -1,12 +1,12 @@
-h1.construction-name
+h1.construction.name
   | #{construction_name}
-p.construction-period
+p.construction.period
   | #{construction_period}
-p.construction-outline
+p.construction.outline
   | #{construction_outline}
 
-figure.figure.work_figure
-  figcaption.figure-caption.text-left.h5
+figure.work
+  figcaption
     | #{caption}
   img src="#{image}" alt="#{caption}"
   p.text-dark

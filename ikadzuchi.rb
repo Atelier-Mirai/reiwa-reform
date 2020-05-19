@@ -84,7 +84,7 @@ module Ikadzuchi
       slim = Ikadzuchi::replace_with_pagination(photos_template, info, images_with_memo, 12)
 
       # ページ先頭へ戻れるよう、タグ追加
-      slim << "\n#page_top\n  a href=\"#\""
+      # slim << "\n#page_top\n  a href=\"#\""
 
       # 施工写真達のslimを出力
       Ikadzuchi::write "#{construction_directory_name}.html.slim", slim
