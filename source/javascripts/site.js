@@ -1,5 +1,6 @@
 $(function(){
-  // page_top
+
+  // 先頭に戻る
   $("#page_top").hide();
   $(window).scroll(function(){
     if ($(this).scrollTop() > 100) { //100pxスクロールしたら表示
@@ -33,5 +34,31 @@ $(function(){
       scrollTop: distance
     }, time, "swing");
     return false;
+  });
+
+  // 固定フッター 電話をかける 表示用
+  $(window).scroll(function() {
+    var currentPos = $(this).scrollTop();
+    var triggerPos = 150;
+    var fixedFooter = $('#fixed_footer');
+
+    if (currentPos > triggerPos) {
+      fixedFooter.addClass('active');
+    } else {
+      fixedFooter.removeClass('active');
+    }
+  });
+
+  // 工事施行例 工事名称表示用
+  $(window).scroll(function() {
+    var currentPos = $(this).scrollTop();
+    var triggerPos = 215;
+    var fixed_construction_name = $('.construction.name');
+
+    if (currentPos > triggerPos) {
+      fixed_construction_name.addClass('active');
+    } else {
+      fixed_construction_name.removeClass('active');
+    }
   });
 });
