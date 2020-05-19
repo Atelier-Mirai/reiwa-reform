@@ -2,12 +2,18 @@
   object
   ページをまたいで使われる各種パーツを定義するクラス
 =============================================================================*/
+@import "wa_no_iro";
+
 @import "billboard";
 @import "footer";
 @import "form";
 @import "header";
+@import "fixed_footer";
+@import "follow_menu";
 @import "main";
+@import "map";
 @import "muuri_filter";
 @import "nav";
 @import "page_top";
+@import "pagination";
 @import "result";

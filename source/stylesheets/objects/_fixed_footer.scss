@@ -1,0 +1,99 @@
+/*=============================================================================
+  固定フッター
+  gar-den.jp より
+=============================================================================*/
+
+/*-----------------------------------------------------------------------------
+  モバイル版
+-----------------------------------------------------------------------------*/
+#fixed_footer {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+
+  bottom: -40px;
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0.3s;
+  &.active {
+    bottom: 0;
+    span {
+      display: inline-block;
+      margin: 6px 0;
+    }
+  }
+
+  nav {
+    bottom: -70px;
+    /* 各書籍へのリンク */
+    ul {
+      overflow: hidden;
+      margin: 0 -1px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-flow: column;
+      li {
+        a {
+          vertical-align: middle;
+          text-align: center;
+          text-decoration: none;
+          display: block;
+          background: $fukamidori;
+          padding-top: 12px;
+          color: $sakurairo;
+          font-size: 11px;
+          height: 60px;
+          border-left: 1px solid $sakurairo;
+          position: relative;
+          span {
+            display: inline-block;
+            margin: 12px 0;
+          }
+        }
+        a::after {
+          content: "";
+          display: block;
+          border: 5px solid transparent;
+          border-left-color: $nanowanairo;
+          border-top-color: $nanowanairo;
+          width: 0;
+          height: 0;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+
+    /* 電話をかける */
+    .telephone {
+      background: $fukamidori;
+      text-align: center;
+      border-top: 1px solid $sakurairo;
+      a {
+        color: $sakurairo;
+        text-decoration: none;
+        width: 100%;
+        display: inline-block;
+        // padding: 10px;
+        font-size: 1rem;
+        small {
+          display: block;
+          font-size: 9px;
+        }
+      }
+    }
+  }
+}
+
+/*-----------------------------------------------------------------------------
+  デスクトップ版
+-----------------------------------------------------------------------------*/
+@media(min-width: 768px) {
+  #fixed_footer {
+    display: none;
+  }
+}

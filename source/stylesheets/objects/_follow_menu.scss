@@ -1,0 +1,60 @@
+/*=============================================================================
+  追随メニュー
+  gar-den.jp より
+=============================================================================*/
+
+/*-----------------------------------------------------------------------------
+  モバイル版
+-----------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------
+  デスクトップ版
+-----------------------------------------------------------------------------*/
+@media(min-width: 768px) {
+  .follow_menu {
+    position: fixed;
+    right: 40px;
+    bottom: 20px;
+    z-index: 10000;
+    ul {
+      list-style: none;
+      li {
+        a {
+          font-size: 0.9rem;
+          text-align: center;
+          text-decoration: none;
+          color: $sakurairo;
+          display: block;
+          width: 100px;
+          height: 100px;
+          padding: 30px 0;
+          line-height: 20px;
+          border-radius: 50px;
+          border: 1px solid $wakatakeiro;
+          background: $wakatakeiro;
+          position: relative;
+          &:hover::after {
+            opacity: 1;
+            border-width: 7px;
+          }
+        }
+        a::after {
+          content: "";
+          display: block;
+          width: 98px;
+          height: 98px;
+          border: 0 solid $sakurairo;
+          border-radius: 50px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          box-sizing: border-box;
+          opacity: 0;
+          transition-property: all;
+          transition-duration: 0.3s;
+          transition-timing-function: ease;
+        }
+      }
+    }
+  }
+}

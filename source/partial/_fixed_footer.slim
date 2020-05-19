@@ -1,0 +1,37 @@
+/! モバイル用固定フッター
+#fixed_footer.mobile.only
+  nav
+    ul
+      li
+        = link_to '/company.html'
+          i.far.fa-building.fa-2x
+          br
+          span
+            | 会社案内
+      li
+        = link_to '/flow.html'
+          i.fas.fa-home.fa-2x
+          br
+          span
+            | 工事の流れ
+      li
+        = link_to '/access.html'
+          i.fas.fa-car.fa-2x
+          br
+          span
+            | 交通案内
+      li
+        = link_to '/contact.html'
+          i.far.fa-envelope.fa-2x
+          br
+          span
+            | お問合せ
+
+    .telephone
+      a href="tel:058-262-5694"
+        span.fas.fa-phone.fa-fw.fa-rotate-180
+        | 電話をかける
+        span style="font-size: large;"
+          | 058-262-5694
+        / small
+        /   | 9:00～18:00

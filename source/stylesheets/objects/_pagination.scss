@@ -1,0 +1,57 @@
+.pagination {
+  display: flex;
+  list-style: none;
+  margin: .2rem 0;
+  padding: .2rem 0;
+  margin-bottom: 1.5rem;
+
+  .page-item {
+    margin: .2rem .05rem;
+
+    span {
+      display: inline-block;
+      padding: .2rem .2rem;
+    }
+
+    a {
+      border-radius: .1rem;
+      display: inline-block;
+      padding: .4rem .6rem;
+      text-decoration: none;
+      font-size: 1rem;
+
+      &:focus, &:hover {
+        color: #00552e;
+      }
+    }
+
+    &.disabled a {
+      cursor: default;
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    &.active a {
+      background: #00552e;
+      color: #fef4f4;
+    }
+
+    &.page-prev {
+      flex: 1 0 50%;
+    }
+
+    &.page-next {
+      flex: 1 0 50%;
+      text-align: right;
+    }
+
+    .page-item-title {
+      margin: 0;
+    }
+
+    .page-item-subtitle {
+      margin: 0;
+      opacity: .5;
+    }
+  }
+}

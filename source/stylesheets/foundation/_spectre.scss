@@ -2731,65 +2731,6 @@ summary.accordion-header::-webkit-details-marker {
   }
 }
 
-.pagination {
-  display: flex;
-  display: -ms-flexbox;
-  list-style: none;
-  margin: .2rem 0;
-  padding: .2rem 0;
-
-  .page-item {
-    margin: .2rem .05rem;
-
-    span {
-      display: inline-block;
-      padding: .2rem .2rem;
-    }
-
-    a {
-      border-radius: .1rem;
-      display: inline-block;
-      padding: .2rem .4rem;
-      text-decoration: none;
-
-      &:focus, &:hover {
-        color: #5755d9;
-      }
-    }
-
-    &.disabled a {
-      cursor: default;
-      opacity: .5;
-      pointer-events: none;
-    }
-
-    &.active a {
-      background: #5755d9;
-      color: #fff;
-    }
-
-    &.page-prev {
-      -ms-flex: 1 0 50%;
-      flex: 1 0 50%;
-    }
-
-    &.page-next {
-      -ms-flex: 1 0 50%;
-      flex: 1 0 50%;
-      text-align: right;
-    }
-
-    .page-item-title {
-      margin: 0;
-    }
-
-    .page-item-subtitle {
-      margin: 0;
-      opacity: .5;
-    }
-  }
-}
-
 .panel {
   border: .05rem solid #dadee4;
   border-radius: .1rem;

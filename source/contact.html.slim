@@ -1,6 +1,8 @@
-main.page-main
-  h2.mb-2
-    | お問い合わせ
+= javascript_include_tag 'form_validate', defer: "true"
+
+.pseudo-class-form.wrapper
+  h2 お問い合わせ
+
   p.mb-3
     |　株式会社ホームメイドは、木部外壁の修復、防水塗装を専門に、リフォーム全般にわたる業務を手がけています。
     br
@@ -13,83 +15,38 @@ main.page-main
     // 参照元URL
     input#referrer_url type="hidden" name="referrer_url"
 
-    .form-group
-      // お問い合わせ内容
-      .col-2.col-sm-12
-        label.form-label.required.show-mobile
-          | お問い合わせ内容
-        label.form-label.required.text-right.mr-2.hide-mobile
-          | お問い合わせ内容
-      .col-9.col-sm-12.mb-2
-        textarea.form-input name="message" autocorrect="off" autocapitalize="off" cols="40" rows="12" required=""
+    fieldset
+      .formWrapper
+        p
+          textarea#message cols="30" name="message" placeholder="お問い合わせ内容" required="" rows="8" autocorrect="off" autocapitalize="off"
+          label.name for="message" お問い合わせ内容
+        p
+          input#name.input placeholder="お名前" required="" type="text" name="name" autocomplete="name"
+          label.name for="name" お名前
+          span.error.message 必須項目です。
+          span.success.message OKです！
+        p
+          input#email.input placeholder="メールアドレス" required="" type="email" name="email" autocomplete="email"
+          label.name for="email"  メールアドレス
+          span.error.message 正しい形式で入力してください。
+          span.success.message OKです！
+        / p
+        /   input#password.input maxlength="18" minlength="6" pattern="^[0-9A-Za-z]+$" placeholder="パスワード" required="" type="password"
+        /   label..name for="password"  パスワード（半角英数6文字以上18文字以下）*
+        /   span.error.message 正しい形式で入力してください
+        /   span.success.message OKです！
+        p
+          input#tel.input maxlength="13" minlength="7" pattern="^(\d|-|\(|\))*$" placeholder="電話番号" required="" type="tel" name="tel" autocomplete="tel"
+          label.name for="tel" 電話番号
+          span.error.message 正しい形式で入力してください。
+          span.success.message OKです！
+        p
+          input#fax.input maxlength="13" minlength="7" pattern="^(\d|-|\(|\))*$" placeholder="FAX番号" type="tel" name="fax"
+          label.name for="fax" FAX番号
+          span.error.message 正しい形式で入力してください。
+          span.success.message OKです！
 
-      // お名前
-      .col-2.col-sm-12
-        label.form-label.required.show-mobile
-          | お名前
-        label.form-label.required.text-right.mr-2.hide-mobile
-          | お名前
-      .col-9.col-sm-12.mb-2
-        input.form-input type="text" name="name" autocomplete="name" required=""
+      p.required
+        | ※ は、必須項目です。
 
-      // メールアドレス
-      .col-2.col-sm-12
-        label.form-label.required.show-mobile
-          | メールアドレス
-        label.form-label.required.text-right.mr-2.hide-mobile
-          | メールアドレス
-      .col-9.col-sm-12.mb-2
-        input.form-input type="email" name="email" autocomplete="email" required=""
-
-      // 電話番号
-      .col-2.col-sm-12
-        label.form-label.required.show-mobile
-          | 電話番号
-        label.form-label.required.text-right.mr-2.hide-mobile
-          | 電話番号
-      .col-9.col-sm-12.mb-2
-        input.form-input type="tel" name="tel" autocomplete="tel" required=""
-
-      // FAX番号
-      .col-2.col-sm-12
-        label.form-label.show-mobile
-          | FAX番号
-        label.form-label.text-right.mr-2.hide-mobile
-          | FAX番号
-      .col-9.col-sm-12.mb-2
-        input.form-input type="text" name="fax"
-
-
-    // 送信ボタン
-    .columns.col-gapless
-      column.col-3
-      column.col-6
-        input#submit.form-input.btn.btn-primary type="submit" value="送信"
-      column.col-3
-
-    // 必須項目注意書き
-    .columns.col-gapless.mb-2
-      .columns.col-12 style="justify-content: flex-end;"
-        p.text-right.mb-0
-          small
-            | (
-          span.text-error
-            | *
-          small
-            | は必須項目です)
-
-
-javascript:
-  // 参照元URLをセット
-  document.getElementById("referrer_url").value = document.referrer;
-
-  // フォーム送信前にタブを閉じる際に、離脱アラートを表示する。
-  window.addEventListener("beforeunload", (event) => {
-    event.preventDefault();
-    event.returnValue = "入力内容を破棄します";
-  });
-
-  // submit ボタンが押されたときには、離脱アラートを表示しない。
-  document.getElementById('submit').addEventListener('click', () => {
-    window.removeEventListener('beforeunload');
-  });
+      button#submit 送信

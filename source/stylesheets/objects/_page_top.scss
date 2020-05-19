@@ -10,9 +10,9 @@
   height: 60px;
   position: fixed;
   right: 1rem;
-  bottom: 8rem;
-  background: #028760;
-  opacity: 0.6;
+  bottom: 120px;
+  background: $wakatakeiro;
+  // opacity: 0.6;
   border-radius: 50%;
   a {
     position: relative;
@@ -21,14 +21,20 @@
     height: 60px;
     text-decoration: none;
     &::before {
-      display: none;
-      font-family: "Font Awesome 5 Solid";
-      content: '\f102';
+      display: inline-block;
+      width: 100px;
+      text-decoration: none;
+      color: $sakurairo;
+      text-align: center;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      font-size: 1.5rem;
+      content: '\f106';
     }
     &::after {
       content: '先頭に戻る';
       font-size: 12px;
-      color: #fff;
+      color: $sakurairo;
       position: absolute;
       top: 35px;
       bottom: 0;
@@ -37,5 +43,23 @@
       margin: auto;
       text-align: center;
     }
+  }
+  &:hover {
+    background: $fukamidori;
+  }
+}
+
+// <div class="pagetop">
+// 	<a href="#page"><i class="fa fa-angle-up"></i></a>
+// <!--.pagetop--></div>
+//
+
+/*-----------------------------------------------------------------------------
+  デスクトップ版
+-----------------------------------------------------------------------------*/
+@media(min-width: 768px) {
+  #page_top {
+    right: 40px;
+    bottom: 480px;
   }
 }

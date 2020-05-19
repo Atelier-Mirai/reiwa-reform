@@ -73,3 +73,20 @@ $values: 25, 50, 75, 100;
 .h-auto {
   height: auto !important;
 }
+
+/*
+  Mobile Only Hide, Computer Only Hide
+-----------------------------------------------------------------------------*/
+/* Mobile Only Hide */
+@media (max-width: 767.98px) {
+  .computer.only {
+    display: none !important;
+  }
+}
+
+/* Computer Only Hide */
+@media (min-width: 768px) {
+  .mobile.only {
+    display: none !important;
+  }
+}

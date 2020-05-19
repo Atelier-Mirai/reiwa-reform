@@ -26,3 +26,8 @@ html
     main.page-main
       = yield
     = partial 'partial/footer'
+
+    = partial 'partial/fixed_footer'
+    = partial 'partial/follow_menu'
+
+    = javascript_include_tag 'app', defer: true
