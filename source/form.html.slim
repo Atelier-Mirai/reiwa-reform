@@ -1,40 +1,52 @@
 = javascript_include_tag 'form_validate', defer: "true"
 
 .pseudo-class-form.wrapper
-  h2 お問い合わせフォーム
+  h2 お問い合わせ
 
-  form
+  p.mb-3
+    |　株式会社ホームメイドは、木部外壁の修復、防水塗装を専門に、リフォーム全般にわたる業務を手がけています。
+    br
+    |『嬉しい』『楽しい』『ありがたい』リフォームを合い言葉に、施主様にやって良かったと喜んでいただける様、日々精進努力しております。
+    br
+    | 　お気軽にご連絡ください。
+
+  form.form-horizontal method="post" action='./success.html' netlify="netlify"
+    input.form-input type="hidden" name="Subject" value="Webお問い合わせ"
+    // 参照元URL
+    input#referrer_url type="hidden" name="referrer_url"
+
     fieldset
       .formWrapper
         p
-          textarea#detail cols="30" name="detail" placeholder="お問い合わせ内容" required="" rows="10"
-          label.name for="detail"  お問い合わせ内容 *
+          textarea#message cols="30" name="message" placeholder="お問い合わせ内容" required="" rows="8" autocorrect="off" autocapitalize="off"
+          label.name for="message" お問い合わせ内容
         p
-          input#name.input placeholder="お名前" required="" type="text"
-          label.name for="name"  お名前 *
+          input#name.input placeholder="お名前" required="" type="text" name="name" autocomplete="name"
+          label.name for="name" お名前
           span.error.message 必須項目です。
           span.success.message OKです！
         p
-          input#email.input placeholder="メールアドレス" required="" type="email"
-          label.name for="email"  メールアドレス *
+          input#email.input placeholder="メールアドレス" required="" type="email" name="email" autocomplete="email"
+          label.name for="email"  メールアドレス
           span.error.message 正しい形式で入力してください。
           span.success.message OKです！
         / p
-        /   input#password.input maxlength="18" minlength="6" pattern="^[0-9A-Za-z]+$" placeholder="パスワード" required="" type="Password"
+        /   input#password.input maxlength="18" minlength="6" pattern="^[0-9A-Za-z]+$" placeholder="パスワード" required="" type="password"
         /   label..name for="password"  パスワード（半角英数6文字以上18文字以下）*
         /   span.error.message 正しい形式で入力してください
         /   span.success.message OKです！
-
         p
-          input#tel.input maxlength="13" minlength="7" pattern="^(\d|-|\(|\))*$" placeholder="電話番号" required="" type="tel"
-          label.name for="tel" 電話番号 *
+          input#tel.input maxlength="13" minlength="7" pattern="^(\d|-|\(|\))*$" placeholder="電話番号" required="" type="tel" name="tel" autocomplete="tel"
+          label.name for="tel" 電話番号
           span.error.message 正しい形式で入力してください。
           span.success.message OKです！
-
         p
-          input#fax.input maxlength="13" minlength="7" pattern="^(\d|-|\(|\))*$" placeholder="FAX番号" type="tel"
+          input#fax.input maxlength="13" minlength="7" pattern="^(\d|-|\(|\))*$" placeholder="FAX番号" type="tel" name="fax"
           label.name for="fax" FAX番号
           span.error.message 正しい形式で入力してください。
           span.success.message OKです！
-      p.required * は必須項目です。
+
+      p.required
+        | ※ は、必須項目です。
+
       button#submit 送信
