@@ -24,6 +24,8 @@
     // margin-right: 2rem;
   }
   &.outline {
+    font-size: 1.15rem;
+    text-indent: 1em;
     margin: 0.5rem 0.5rem;
     /* ##### 画面の横幅568ピクセル以上 ##### */
     @media (min-width: 568px) {
@@ -35,11 +37,15 @@
 figure.work {
   display: grid;
   justify-content: center;
+  margin-bottom: 1rem;
+  &:last-child {
+    margin-bottom: 2rem;
+  }
 
   // 表題
   figcaption {
     text-align: left;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #66758c;
     margin-top: .4rem;
   }
@@ -48,6 +54,7 @@ figure.work {
   img {
     width: 100%;
     max-width: 640px;
+    justify-self: center;
 
     // 額縁
     padding: 7px;
@@ -57,18 +64,15 @@ figure.work {
   }
 
   // 補足説明
-  p {
-    text-align:left;
-    padding-left: 30%;
-    /* ##### 画面の横幅568ピクセル以上 ##### */
-    @media (min-width: 568px) {
-      padding-left: 50%;
+  .comment {
+    display: grid;
+    grid-template-columns: 80px minmax(100px, 560px);
+    p {
+      grid-column: 2;
+      text-align:left;
+      overflow-wrap: break-word;
+      text-indent: 1em;
+      margin: 0;
     }
   }
 }
-
-// .page-content.active {
-//   figure:last-child {
-//     margin-bottom: 0;
-//   }
-// }

@@ -9,5 +9,6 @@ figure.work
   figcaption
     | #{caption}
   img src="#{image}" alt="#{caption}"
-  p.text-dark
-    | #{comment}
+  .comment
+    p.text-dark
+      | #{comment}

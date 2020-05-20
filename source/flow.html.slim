@@ -1,63 +1,77 @@
-main.page-main.reform-flow
-  h1.h3 リフォームの流れ
+h1.construction.name
+  | リフォーム工事の流れ
+p.construction.outline
+  | このページでは、リフォーム工事の一般的な流れについて、ご案内いたします。
 
-  p
-    | このページでは、リフォームの一般的な流れについて、ご案内いたします。
-
-  ol
-    li
+#page1.page-content.active
+  figure.work
+    figcaption
       | お問い合わせ
-      = image_tag 'telephone_girl.jpg', class: 'img-responsive'
-      p
+    = image_tag 'telephone_girl.jpg', alt: 'お問い合わせ'
+    .comment
+      p.text-dark
         = link_to 'お問い合わせフォーム', '/contact.html'
         | や、
-        = link_to 'メール', 'mailto:contact@homemade-reform.com'
+        = link_to 'メール', 'mailto:usui_@kaeru.gr.jp'
         | 、
         = link_to '電話', 'tel:058-262-5694'
-        | 、FAXなど、お気軽にお問い合わせください。
-        | お客様の元へお伺いさせていただく日時など、ご連絡させて頂きます。
+        | など、お気軽にお問い合わせください。
+      p.text-dark
+        | お客様の下へお伺いさせていただく日時など、ご連絡させて頂きます。
 
-    li
+  figure.work
+    figcaption
       | 現地調査、ヒアリング
-      = image_tag 'kitchen_old.jpg', class: 'img-responsive'
-      p
+    = image_tag 'kitchen_old.jpg', alt: '現地調査'
+    .comment
+      p.text-dark
         | お客様のお住まいを拝見させて頂きます。
         | 生活上のご不満やどのようなリフォームにしたいかなど、お聞かせください。
         | 参考になる雑誌や写真などございましたら、併せて拝見させてください。
 
-    li
-      | お見積、プラン作成
-      = image_tag 'estimate.jpg', class: 'img-responsive'
-      p
+  figure.work
+    figcaption
+      | お見積もり、プラン作成
+    = image_tag 'estimate.jpg', alt: 'お見積もり'
+    .comment
+      p.text-dark
         | お客様のご要望やご予算などをお伺いさせていただいた上で、お客様のリフォームへの思いを大切にご提案させていただきます。一生懸命頑張りますので、ご質問がありましたら、ご遠慮なくどうぞ。
 
-    li
+  figure.work
+    figcaption
       | ご成約
-      = image_tag 'hands.jpg', class: 'img-responsive'
-      p
+    = image_tag 'hands.jpg', alt: 'ご成約'
+    .comment
+      p.text-dark
         | さまざまな会社がある中で、当社を選んで頂けたら、とても幸せです。
         | なにか気になる点などございましたら、ご遠慮なくお話下さい。
 
-    li
+  figure.work
+    figcaption
       | いよいよ工事のその前に
-      = image_tag 'house.jpg', class: 'img-responsive'
-      p
+    = image_tag 'house.jpg', alt: 'いよいよ工事のその前に'
+    .comment
+      p.text-dark
         | ご近所様にも気持ちよく思って頂けるよう、ご挨拶に伺います。
         | また、駐車場の有無や、気をつけて欲しい事など事前にお聞きします。
         | 当社では、キズが付きにくいふんわりマットなどを使用し、要所要所にしっかりと養生を行ないます。
         | これが工事を始める前の一番大切な工事となります。
 
-    li
+  figure.work
+    figcaption
       | 着工
-      = image_tag 'painting.jpg', class: 'img-responsive'
-      p
+    = image_tag 'painting.jpg', alt: '着工'
+    .comment
+      p.text-dark
         | ベテランのスタッフが、工事予定を元に工事を進めて参ります。
         | 何かお気付きの点がございましたら、ご遠慮なく、ご連絡ください。
 
-    li
+  figure.work
+    figcaption
       | 完成
-      = image_tag 'kitchen_new.jpg', class: 'img-responsive'
-      p
+    = image_tag 'kitchen_new.jpg', alt: '完成'
+    .comment
+      p.text-dark
         | いよいよ完成です。入念な検査を行い、お客様にご覧いただきます。
         | 職人技が光る丁寧な仕上がり、
         | 「嬉しいリフォーム」「楽しいリフォーム」「ありがたいリフォーム」
