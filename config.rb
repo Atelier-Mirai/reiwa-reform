@@ -5,6 +5,18 @@ activate :livereload
 activate :relative_assets
 set :relative_links, true
 
+# ES5へのコンパイルのために parcel を呼び出す
+activate :external_pipeline, {
+  name: :parcel,
+  command: build? ? "parcel build source/javascripts/site.js --out-dir build/javascripts/"
+                  : "parcel watch source/javascripts/site.js --out-dir build/javascripts",
+  source: './build',
+  latency: 1
+}
+
+# テキストファイルの gzip 圧縮
+activate :gzip
+
 # ベンダープリフィックス付与
 # activate :autoprefixer do |prefix|
 #   prefix.browsers = "last 2 versions"
