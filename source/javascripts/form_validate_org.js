@@ -1,5 +1,3 @@
-"use strict";
-
 /*=============================================================================
   問い合わせフォーム用 JavaScript
 =============================================================================*/
@@ -9,19 +7,19 @@
   https://ics.media/entry/200413/
 -----------------------------------------------------------------------------*/
 // フォーム全体の妥当性をチェック
-var validate = function validate() {
-  var validForm = document.querySelector("form:valid");
+const validate = () => {
+  const validForm = document.querySelector("form:valid");
   // const submitButton = document.querySelector("#submit");
   // こちらも等価
-  var submitButton = document.getElementById("submit");
-  submitButton.disabled = validForm === null;
+  const submitButton = document.getElementById("submit")
+  submitButton.disabled = (validForm === null);
 };
 
 // 初期読み込み時に実行
 validate();
 
 // フォームに入力されたら、validate関数を実行
-document.querySelectorAll("input,textarea").forEach(function (input) {
+document.querySelectorAll("input,textarea").forEach(input => {
   input.addEventListener("input", validate);
 });
 
@@ -36,9 +34,9 @@ document.getElementById("referrer_url").value = document.referrer;
   https://qiita.com/naoki_koreeda/items/bf0f512dbd91b450c671
 -----------------------------------------------------------------------------*/
 // フォーム送信前にタブを閉じる際に、確認アラートを表示する。
-var confirmation_aleat = function confirmation_aleat(event) {
+const confirmation_aleat = (event) => {
   // カスタムメッセージの設定（IE/Edgeのみ有効)
-  var confirmMessage = '入力欄を破棄し、離脱します。よろしいですか？';
+  const confirmMessage = '入力欄を破棄し、離脱します。よろしいですか？';
   event.returnValue = confirmMessage;
   return confirmMessage;
 };
@@ -47,7 +45,7 @@ var confirmation_aleat = function confirmation_aleat(event) {
 window.addEventListener('beforeunload', confirmation_aleat, false);
 
 // submit ボタンが押されたときには、離脱アラートを表示しない。
-document.getElementById('submit').addEventListener('click', function () {
+document.getElementById('submit').addEventListener('click', () => {
   // submit時はアラート表示させない
   window.removeEventListener('beforeunload', confirmation_aleat, false);
 });
