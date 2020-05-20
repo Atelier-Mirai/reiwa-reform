@@ -1,0 +1,8 @@
+{
+  "name": "reiwa-reform",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@bitbucket.org:Atelier-Mirai/reiwa-reform.git",
+  "author": "Atelier-Mirai <contact@atelier-mirai.net>",
+  "license": "MIT"
+}
