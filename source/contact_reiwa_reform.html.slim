@@ -1,9 +1,4 @@
 = javascript_include_tag 'form_validate', defer: "true"
-scss:
-  p.hidden {
-    display: none !important;
-  }
-
 
 .pseudo-class-form.wrapper
   h2 お問い合わせ
@@ -15,18 +10,13 @@ scss:
     br
     | 　お気軽にご連絡ください。
 
-
-  form name="contact" method="post" action='./success.html' netlify-honeypot="bot-field" data-netlify="true"
-    input.form-input type="hidden" name="Subject" value="Web お問い合わせ"
+  form.form-horizontal method="post" action='./success.html' netlify="netlify"
+    input.form-input type="hidden" name="Subject" value="Webお問い合わせ"
     // 参照元URL
-    input#referrer_url type="hidden" name="Referrer URL"
+    input#referrer_url type="hidden" name="referrer_url"
 
     fieldset
       .formWrapper
-        p.hidden
-          label
-            | Don’t fill this out if you're human:
-            input name="bot-field"
         p
           textarea#message cols="30" name="message" placeholder="お問い合わせ内容" required="" rows="8" autocorrect="off" autocapitalize="off"
           label.name for="message" お問い合わせ内容
