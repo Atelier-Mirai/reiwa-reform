@@ -15,11 +15,11 @@
   form name="contact" method="post" action='/success.html' netlify-honeypot="bot-field" data-netlify="true"
 
     // メール通知用
-    label.hidden for="Subject" お問い合わせ内容
-    input type="hidden" name="Subject" value="Web お問い合わせ"
+    label.hidden for="subject" お問い合わせ内容
+    input#subject type="hidden" name="subject" value="Web お問い合わせ"
     // 参照元URL
-    label.hidden for="Referrer URL" お問い合わせ前に見ていたURL
-    input#referrer_url type="hidden" name="Referrer URL"
+    label.hidden for="referrer_url" お問い合わせ前に見ていたURL
+    input#referrer_url type="hidden" name="referrer_url"
 
     fieldset
       .formWrapper
