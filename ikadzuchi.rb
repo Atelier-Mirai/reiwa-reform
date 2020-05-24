@@ -8,6 +8,7 @@
 ################################################################################
 
 require 'pathname'
+require './construction'
 
 module Ikadzuchi
   class << self
@@ -25,37 +26,55 @@ module Ikadzuchi
         directories << dir.to_s
       end
 
+      # _description.csv: 工事概要と、工事現場が書かれているので、
+      # 読み込んで、配列に格納する。
+      # descriptions = []
+      # desc = Struct.new("Desc", :outline, :site)
+      # File.read('_description.csv').each_line do |line|
+      #   _, b, c = line.split(',')
+      #    descriptions << desc.new(b, c.chomp)
+      # end
+      #
+      # 昇順に並び替え
+      # directories = directories.sort { |a, b| a <=> b }
+      #
+      # # 併合開始
+      # directories.each_with_index do |dir, i|
+      #   c = Construction.new(dir)
+      #   c.outline = descriptions[i].outline if c.outline.nil?
+      #   c.site = descriptions[i].site if c.site.nil?
+      #   c.save(dir)
+      # end
+
       # 降順に並び替え
       directories = directories.sort { |a, b| b <=> a }
 
-      # *.slim を生成する
-      # 施工一覧用の見出し部分のみの生成
-      # (追記は、each内で行う)
+      # 施工一覧用の見出し部分を生成する
       results_template = Ikadzuchi::template("_results_template.txt", pagination: false)
       slim = Ikadzuchi::replace(results_template.header, {})
       Ikadzuchi::write "_results.slim", slim
 
+      # 施工一覧用 サムネイルの追加と
+      # 各工事用のページを生成する
       directories.each do |directory|
         Ikadzuchi::generate(directory)
       end
     end
-
-
 
     ################################################################################
     # 工事名ディレクトリにある画像(.jpg)と、memo.csvを雛形にslimファイルを生成する
     # @param [String] construction_name 工事名称
     # @return "#{construction_name}.slim" ファイルが生成される
     ################################################################################
-    def generate(construction_directory_name)
+    def generate(directory)
       # 雛形ファイルを読み込む
       photos_template = Ikadzuchi::template("_photos_template.txt", pagination: true)
       # 画像を読み込む
-      images = Ikadzuchi::images(construction_directory_name)
+      images = Ikadzuchi::images(directory)
       # 備忘録を読み込む
-      memo = Ikadzuchi::memo("#{construction_directory_name}/_memo.csv")
+      memo = Ikadzuchi::memo("#{directory}/_memo.csv")
       # 工事情報を読み込む
-      info = Ikadzuchi::info("#{construction_directory_name}/_information.txt")
+      info = Ikadzuchi::info("#{directory}/_information.txt")
       info[:construction_photo] = images.last if info[:construction_photo]&.empty?
 
       # 画像ファイル名の処理
@@ -77,27 +96,23 @@ module Ikadzuchi
       end
       # サブディレクトリ名付与
       images_with_memo.each do |m|
-        m[:image] = "#{construction_directory_name}/#{m[:image]}"
+        m[:image] = "#{directory}/#{m[:image]}"
       end
 
       # 頁を付与
       slim = Ikadzuchi::replace_with_pagination(photos_template, info, images_with_memo, 12)
 
-      # ページ先頭へ戻れるよう、タグ追加
-      # slim << "\n#page_top\n  a href=\"#\""
-
       # 施工写真達のslimを出力
-      Ikadzuchi::write "#{construction_directory_name}.html.slim", slim
+      Ikadzuchi::write "#{directory}.html.slim", slim
 
       # 施工事例 一覧の生成
       results_template = Ikadzuchi::template("_results_template.txt", pagination: false)
 
       # サムネイル用slimを追記する
+      info[:directory] = directory
       slim = Ikadzuchi::replace(results_template.body, info)
       Ikadzuchi::append "_results.slim", slim
     end
-
-
 
     ################################################################################
     # ページネーションを出力する
@@ -201,23 +216,24 @@ module Ikadzuchi
     ################################################################################
     def info(filename)
       hash = {
-        construction_name:    "",
-        construction_started: "",
-        construction_ended:   "",
-        construction_period:  "",
-        construction_outline: "",
-        construction_kinds:   "other",
-        construction_photo:   ""
+        name:    "",
+        started: "",
+        ended:   "",
+        period:  "",
+        outline: "",
+        kinds:   "other",
+        photo:   "",
+        site:    ""
       }
-      hash[:construction_directory_name] = filename.split('/').first
 
       h = {
-        '工事名称': :construction_name,
-        '工事開始日': :construction_started,
-        '工事完了日': :construction_ended,
-        '工事概要': :construction_outline,
-        '工事種別': :construction_kinds,
-        '工事完成写真': :construction_photo
+        '工事名称': :name,
+        '工事開始日': :started,
+        '工事完了日': :ended,
+        '工事概要': :outline,
+        '工事種別': :kinds,
+        '工事完成写真': :photo,
+        '工事現場': :site
       }
 
       kinds = {
@@ -240,7 +256,7 @@ module Ikadzuchi
           class_names = []
           values = value&.tr('、', ',')&.split(',')
           values&.each { |v| class_names.push kinds[v.to_sym] }
-          hash[:construction_kinds] = if class_names.empty?
+          hash[:kinds] = if class_names.empty?
                                         'other'
                                       else
                                         class_names.join
@@ -250,10 +266,12 @@ module Ikadzuchi
             value << '.jpg'
           end
           hash[h[key.to_sym]] = value.to_s
+        when '工事現場'
+          hash[:site] = value
         end
       end
       # 工事期間
-      hash[:construction_period] = "#{hash[:construction_started]} 〜 #{hash[:construction_ended]}"
+      hash[:period] = "#{hash[:started]} 〜 #{hash[:ended]}"
       hash
     end
 
@@ -309,11 +327,16 @@ module Ikadzuchi
       if per_page * total_pages != images_with_memo.count
         slim << pagination(current_page: current_page, total_pages: total_pages)
       end
-      # slim << "h1 #{info[:construction_name]}\n"
-      # slim << "h1 #{info[:construction_directory_name]}"
       slim
     end
 
+    ################################################################################
+    # ファイルを読み込む
+    # @params [String] filename
+    ################################################################################
+    def read(filename)
+      File.read filename
+    end
 
     ################################################################################
     # ファイルを出力する
@@ -351,9 +374,6 @@ module Ikadzuchi
     end
   end
 end
-
-
-
 
 ################################################################################
 #

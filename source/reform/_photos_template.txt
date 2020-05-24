@@ -1,9 +1,9 @@
 h1.construction.name
-  | #{construction_name}
+  | #{name}
 p.construction.period
-  | #{construction_period}
+  | #{period}
 p.construction.outline
-  | #{construction_outline}
+  | #{outline}
 
 figure.work
   figcaption

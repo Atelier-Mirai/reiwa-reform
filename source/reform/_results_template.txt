@@ -11,24 +11,18 @@ section.grid-wrapper
           option value="restore"    台風修理工事を表示
           option value="tile"       瓦・屋根工事を表示
           option value="wall"       外壁工事を表示
-    /   | 並び替え
-    /   select.sort-field.form-control
-    /     option value="order"  None
-    /     option value="title"  Order by fruit name
-    /     option value="color"  Order by color name
   .grid
 
-    .item.#{construction_kinds} data-color="#{construction_kinds}" data-title="#{construction_name}" data-started="#{construction_started}"
+    .item.#{kinds} data-color="#{kinds}" data-title="#{name}" data-started="#{started}"
       .item-content
         .custom-content
           .card
             .card-image
-              a href="reform/#{construction_directory_name}.html"
-                img.img-responsive src="reform/#{construction_directory_name}/#{construction_photo}"
+              a href="reform/#{directory}.html"
+                img.img-responsive src="reform/#{directory}/#{photo}"
             .card-header
-              h3.h6.card-title.ellipsis
-                | #{construction_name}
-                / | #{construction_started}
+              h2.h6.card-title.ellipsis
+                | 【#{site}】#{name}
             .card-body
               p.ellipsis
-                | #{construction_outline}
+                | #{outline}
