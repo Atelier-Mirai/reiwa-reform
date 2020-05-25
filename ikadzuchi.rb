@@ -11,6 +11,7 @@ require 'pathname'
 require './construction'
 
 module Ikadzuchi
+
   class << self
     # サブディレクトリごとに、generateを呼び出す
     def generate_all
@@ -50,9 +51,8 @@ module Ikadzuchi
       directories = directories.sort { |a, b| b <=> a }
 
       # 施工一覧用の見出し部分を生成する
-      results_template = Ikadzuchi::template("_results_template.txt", pagination: false)
-      slim = Ikadzuchi::replace(results_template.header, {})
-      Ikadzuchi::write "_results.slim", slim
+      results_template = Ikadzuchi::template("_results_template.txt")
+      Ikadzuchi::write("_results.slim", results_template.header)
 
       # 施工一覧用 サムネイルの追加と
       # 各工事用のページを生成する
@@ -67,51 +67,21 @@ module Ikadzuchi
     # @return "#{construction_name}.slim" ファイルが生成される
     ################################################################################
     def generate(directory)
-      # 雛形ファイルを読み込む
-      photos_template = Ikadzuchi::template("_photos_template.txt", pagination: true)
-      # 画像を読み込む
-      images = Ikadzuchi::images(directory)
-      # 備忘録を読み込む
-      memo = Ikadzuchi::memo("#{directory}/_memo.csv")
+      # 雛形ファイルを読み込む ページネーション有効
+      photos_template = Ikadzuchi::template("_photos_template.txt", true)
       # 工事情報を読み込む
-      info = Ikadzuchi::info("#{directory}/_information.txt")
-      info[:construction_photo] = images.last if info[:construction_photo]&.empty?
-
-      # 画像ファイル名の処理
-      if memo.first.keys.include?(:image)
-        # memoにimageファイル名まで記されているなら、.jpgを付与
-        images_with_memo = memo
-        images_with_memo.each do |m|
-          m[:image] += ".jpg" unless m[:image].include? ".jpg"
-        end
-      else
-        # 画像ファイル名を取得し、memoと併合する
-        images_with_memo = images.map.with_index do |image, i|
-          if !image.nil? && !memo[i].nil?
-            { image: image }.merge memo[i]
-          end
-        end
-        # メモより画像が多いとき、余分なhtmlが出力されるので、対策
-        images_with_memo.compact!
-      end
-      # サブディレクトリ名付与
-      images_with_memo.each do |m|
-        m[:image] = "#{directory}/#{m[:image]}"
-      end
-
+      info            = Construction.new(directory)
+      # 備忘録を読み込む
+      memo            = Ikadzuchi::memo(directory)
       # 頁を付与
-      slim = Ikadzuchi::replace_with_pagination(photos_template, info, images_with_memo, 12)
-
+      slim = Ikadzuchi::replace_with_pagination(photos_template, info, memo)
       # 施工写真達のslimを出力
       Ikadzuchi::write "#{directory}.html.slim", slim
 
-      # 施工事例 一覧の生成
-      results_template = Ikadzuchi::template("_results_template.txt", pagination: false)
-
-      # サムネイル用slimを追記する
-      info[:directory] = directory
-      slim = Ikadzuchi::replace(results_template.body, info)
-      Ikadzuchi::append "_results.slim", slim
+      # 施工事例一覧に、この工事のサムネイルを追記する
+      results_template = Ikadzuchi::template("_results_template.txt")
+      thumbnail_slim   = Ikadzuchi::replace(results_template.body, info)
+      Ikadzuchi::append "_results.slim", thumbnail_slim
     end
 
     ################################################################################
@@ -154,7 +124,6 @@ module Ikadzuchi
       "\n  .pagination\n" << pagination.split("\n").map { |line| "    #{line}" }.join("\n") << "\n\n"
     end
 
-
     ################################################################################
     # 指定されたディレクトリ内の画像ファイル名を返す
     # @param [String] directory 画像ファイルの置かれているディレクトリ名
@@ -163,118 +132,36 @@ module Ikadzuchi
     def images(directory)
       # 画像ファイル名を取得
       Dir.glob("#{directory}/*.jpg").map { |f| File.split(f)[1] }.sort
-      # Dir.glob("*.jpg").sort.map { |f| File.split(f)[1] }.sort
     end
-
 
     ################################################################################
     # 指定された雛形を読み込む
     # @param [String] filename 雛形ファイル名
     # @return [Template] シングルトン
     ################################################################################
-    def template(filename, pagination)
-      Template.read(filename, pagination)
+    def template(filename, pagination = false)
+      Template.read(filename, pagination = false)
     end
-
 
     ################################################################################
     # 指定された備忘録を読み込む
     # @param [String] filanem 備忘録のファイル名
     # @return [Array] 読み込んだ備忘録
     ################################################################################
-    def memo(filename)
-      # カラム名の読み込み
-      column_names = []
-      memo = File.read filename
-      # return memo
-      memo.each_line do |line|
-        # 先頭行はカラム名なので読み取る
-        column_names = line.chop.tr('"', '').tr("'", '').tr(" ", "").split(',')
-        break
-      end
+    # メモ型構造体
+    Memo = Struct.new(:caption, :comment, :image)
 
-      array = []
+    def memo(directory)
       # 各フィールドを読み込み、arrayに格納する
-      memo.each_line.with_index do |line, i|
+      array = []
+      File.read("#{directory}/_memo.csv").each_line.with_index do |line, i|
         next if i == 0 # 先頭行はカラム名なので読み飛ばす
 
-        columns = line.chop.tr('"', '').tr("'", '').tr(" ", "").split(',').map(&:strip)
-        hash = {}
-        column_names.each_with_index do |c, i|
-          hash.store column_names[i].to_sym, columns[i].to_s
-        end
-        array.push hash
+        caption, comment, image = line.chomp.split(',').map(&:strip)
+        array << Memo.new(caption, comment, "#{directory}/#{image}")
       end
       array
     end
-
-
-    ################################################################################
-    # 指定された工事情報を読み込む
-    # @param [String] filanem 工事情報のファイル名
-    # @return [Hash] 読み込んだ工事情報
-    ################################################################################
-    def info(filename)
-      hash = {
-        name:    "",
-        started: "",
-        ended:   "",
-        period:  "",
-        outline: "",
-        kinds:   "other",
-        photo:   "",
-        site:    ""
-      }
-
-      h = {
-        '工事名称': :name,
-        '工事開始日': :started,
-        '工事完了日': :ended,
-        '工事概要': :outline,
-        '工事種別': :kinds,
-        '工事完成写真': :photo,
-        '工事現場': :site
-      }
-
-      kinds = {
-        '大規模': 'renovation',
-        '簡易': 'easily',
-        '台風直し': 'restore',
-        '瓦・屋根': 'tile',
-        '外壁': 'wall',
-        'その他': 'other'
-      }
-
-      info = File.read filename
-      info.each_line do |line|
-        key, value = line.chop.tr('：', ':').split(':')
-        case key
-        when '工事名称', '工事開始日', '工事完了日', '工事概要'
-          hash[h[key.to_sym]] = value.to_s
-        when '工事種別'
-          # 工事種別は複数指定されるときもあるので
-          class_names = []
-          values = value&.tr('、', ',')&.split(',')
-          values&.each { |v| class_names.push kinds[v.to_sym] }
-          hash[:kinds] = if class_names.empty?
-                                        'other'
-                                      else
-                                        class_names.join
-                                      end
-        when '工事完成写真'
-          if !value.nil? && !value.include?('.jpg')
-            value << '.jpg'
-          end
-          hash[h[key.to_sym]] = value.to_s
-        when '工事現場'
-          hash[:site] = value
-        end
-      end
-      # 工事期間
-      hash[:period] = "#{hash[:started]} 〜 #{hash[:ended]}"
-      hash
-    end
-
 
     ################################################################################
     # 雛形を置換する
@@ -282,40 +169,45 @@ module Ikadzuchi
     # @param [String] hash 置換用 key/value
     # @return [String] 置換後のtemplate
     ################################################################################
-    def replace(template, hash)
-      hash&.each do |key, value|
+    def replace(template, data)
+      data = data.to_h if data.kind_of? Struct
+      data = data.to_h if data.kind_of? Construction
+
+      data&.each do |key, value|
         template = template.gsub("\#{#{key}}", value.to_s)
       end
       template
     end
 
-
     ################################################################################
-    # 雛形を置換する
+    # 工事写真用雛形を置換することによって、各工事の施行写真が納められたslimファイルを生成する
     # @param  [String]  template 雛形
     # @param  [Hash]    info 工事情報
     # @param  [String]  array 置換用 key/value hashの配列
     # @param  [Integer] per_page  一頁に何枚の写真を表示させるか
     # @return [String]  置換後のtemplate
     ################################################################################
-    def replace_with_pagination(template, info, images_with_memo, per_page = 12)
+    def replace_with_pagination(template, info, memo, per_page = 12)
+
       current_page = 1
-      total_pages = (images_with_memo.count / per_page.to_f).ceil
+      total_pages  = (memo.count / per_page.to_f).ceil
+
       # 施工写真達の先頭に工事名称生成
       slim = Ikadzuchi::replace(template.header, info)
       slim << "\n"
 
-      images_with_memo.each.with_index(1) do |e, i|
-        if i % per_page == 1
-          slim << "\#page#{current_page}.page-content#{ current_page == 1 ? '.active' : '' }\n"
-        end
+      memo.each.with_index(1) do |memo, i|
+        # ページ先頭であれば、.active 付与
+        active = current_page == 1 ? '.active' : ''
 
         # 施工写真達の先頭にページネーション生成
         if i % per_page == 1
+          slim << "\#page#{current_page}.page-content#{active}\n"
           slim << pagination(current_page: current_page, total_pages: total_pages)
         end
 
-        slim << Ikadzuchi::replace(template.body, e)
+        # 真ん中の写真達
+        slim << Ikadzuchi::replace(template.body, memo)
 
         # 施工写真達の末尾にページネーション生成
         if i % per_page == 0
@@ -323,8 +215,9 @@ module Ikadzuchi
           current_page += 1
         end
       end
+
       # 最終頁の末尾にページネーション生成
-      if per_page * total_pages != images_with_memo.count
+      if per_page * total_pages != memo.count
         slim << pagination(current_page: current_page, total_pages: total_pages)
       end
       slim
@@ -347,7 +240,6 @@ module Ikadzuchi
       File.write filename, text
     end
 
-
     ################################################################################
     # ファイルに追記する
     # @params [String] filename
@@ -358,7 +250,6 @@ module Ikadzuchi
         f.puts text
       end
     end
-
 
     ################################################################################
     # 文字数制限を行う
@@ -390,7 +281,7 @@ class Template
   end
 
   class << self
-    def read(filename, pagination)
+    def read(filename, pagination = false)
       template        = Template.instance
       template.all    = ""
       template.header = ""

@@ -3,13 +3,15 @@
 # カード型データベースクラス
 #
 ################################################################################
+require 'pry'
+
 module M
   HASH = {
     '工事名称': :name,
     '工事開始日': :started,
     '工事完了日': :ended,
     '工事概要': :outline,
-    '工事種別': :kinds,
+    '工事種別': :kinds_pretty,
     '工事完成写真': :photo,
     '工事現場': :site
   }
@@ -22,7 +24,6 @@ module M
     '外壁': 'wall',
     'その他': 'other'
   }
-
 
   refine String do
     # '工事名称' -> ':name' に変換
@@ -52,43 +53,49 @@ end
 class Construction
   using M
 
-  attr_accessor :name,    # 工事名称
-                :started, # 工事開始日
-                :ended,   # 工事完了日
-                :outline, # 工事概要
-                :kinds,   # 工事種別
-                :photo,   # 工事完成写真
-                :site     # 工事現場
-
-  HASH = {
-    '工事名称': :name,
-    '工事開始日': :started,
-    '工事完了日': :ended,
-    '工事概要': :outline,
-    '工事種別': :kinds,
-    '工事完成写真': :photo,
-    '工事現場': :site
-  }
+  attr_accessor :name,         # 工事名称
+                :started,      # 工事開始日
+                :ended,        # 工事完了日
+                :outline,      # 工事概要
+                :kinds,        # 工事種別
+                :kinds_pretty, # 工事種別
+                :photo,        # 工事完成写真
+                :site,         # 工事現場
+                :directory     # ディレクトリ
 
   def initialize(data_directory)
     File.read("#{data_directory}/_information.txt").each_line do |line|
       k, v = line.chomp.split('：')
       instance_variable_set("@#{k.to_symbol}", v)
     end
+    @directory = data_directory
+    @kinds     = M::KINDS[@kinds_pretty.to_sym]
   end
 
   def show
-    HASH.each do |k, v|
+    M::HASH.each do |k, v|
       print "#{k}：", instance_variable_get("@#{v}"), "\n"
     end
+    return nil
+  end
+
+  def to_h
+    h = {}
+    M::HASH.values.each do |v|
+      h[v] = instance_variable_get("@#{v}")
+    end
+    h[:directory] = @directory
+    h[:kinds]     = @kinds
+    h
   end
 
   def save(data_directory = "")
     filename = data_directory.empty? ? "_information.txt" : "#{data_directory}/_information.txt"
     File.open(filename, "w", 0755) do |f|
-      HASH.each do |k, v|
+      M::HASH.each do |k, v|
         f.print "#{k}：", instance_variable_get("@#{v}"), "\n"
       end
     end
   end
+
 end

@@ -13,7 +13,7 @@ section.grid-wrapper
           option value="wall"       外壁工事を表示
   .grid
 
-    .item.#{kinds} data-color="#{kinds}" data-title="#{name}" data-started="#{started}"
+    .item.#{kinds} data-color="#{kinds}" data-title="#{name}"
       .item-content
         .custom-content
           .card
@@ -22,7 +22,7 @@ section.grid-wrapper
                 img.img-responsive src="reform/#{directory}/#{photo}"
             .card-header
               h2.h6.card-title.ellipsis
-                | 【#{site}】#{name}
+                | [#{site}] #{name}
             .card-body
               p.ellipsis
                 | #{outline}
