@@ -16,7 +16,8 @@ $gen:               #0d0d0d; // 玄(げん)
 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    @media (min-width: 628px) { // 三列表示
+    @media (min-width: 415px) { // 三列表示
+    // @media (min-width: 628px) { // 三列表示
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
     @media (min-width: 1280px) { // 五列表示(横幅固定)
@@ -54,18 +55,21 @@ $gen:               #0d0d0d; // 玄(げん)
     .card-body {
       margin: 0 auto;
       padding: 0;
+      padding-bottom: 2px;
       // 施工事例の説明文の省略記号(...)
       p.ellipsis {
         display: inline-block;
-        height: 72px;
+        height: 70px;
         padding: 0rem 0.46rem;
         margin: 0;
         text-align: left;
-        font-size: 0.77rem;
+        // font-size: 0.77rem;
+        font-size: 14.5px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 4;
         overflow: hidden;
+        line-height: 1.2;
       }
     }
   }
