@@ -12,5 +12,3 @@ gem 'slim'
 gem "middleman-imageoptim"
 # HTML圧縮を行う
 gem "middleman-minify-html"
-
-gem "minitest-reporters"
