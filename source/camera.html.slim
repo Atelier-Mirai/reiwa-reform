@@ -1,0 +1,33 @@
+h1 camera
+
+<form action="server.cgi" method="post" enctype="multipart/form-data">
+  <input type="file" name="image" accept="image/*" capture="user">
+  <input type="submit" value="Upload">
+</form>
+
+h1 video
+
+<form action="server.cgi" method="post" enctype="multipart/form-data">
+  <input type="file" name="video" accept="video/*" capture="environment">
+  <input type="submit" value="Upload">
+</form>
+
+javascript:
+  let input = document.querySelector('input[type=file]');
+
+  input.onchange = function () {
+    let file = input.files[0];
+
+    upload(file);
+    drawOnCanvas(file);
+    displayAsImage(file);
+  };
+
+  function upload(file) {
+    let form = new FormData(),
+        xhr = new XMLHttpRequest();
+
+    form.append('image', file);
+    xhr.open('post', 'server.php', true);
+    xhr.send(form);
+  }
