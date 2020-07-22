@@ -12,6 +12,34 @@ h1 video
   <input type="submit" value="Upload">
 </form>
 
+h1 YouTube
+.video
+  .inner
+    iframe allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/OAo1GBrdvzg?rel=0&showinfo=0"
+
+scss:
+  .video {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .video .inner {
+    overflow: hidden;
+    position: relative;
+    padding-top: calc(100% * 9 / 16);
+  }
+
+  .video .inner iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+h1 写真の投稿
+= link_to '五級位上昇を目指す会 掲示板', 'https://shogi-5jk.herokuapp.com/bbs', style: 'font-size: larger;'
+
 javascript:
   let input = document.querySelector('input[type=file]');
 
