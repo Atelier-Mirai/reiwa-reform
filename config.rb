@@ -1,3 +1,5 @@
+require "uglifier"
+
 # 自動再読み込み
 activate :livereload
 
@@ -36,7 +38,14 @@ configure :build do
   # CSS 圧縮
   activate :minify_css
   # # JavaScript 圧縮
-  activate :minify_javascript
+  activate :minify_javascript,
+    compressor: proc {
+      ::Uglifier.new(
+        :mangle => {:toplevel => true},
+        :compress => {:unsafe => true},
+        :harmony => true
+      )
+    }
   # # イメージ 圧縮
   activate :imageoptim
   # アセットファイルの URL にハッシュを追加
