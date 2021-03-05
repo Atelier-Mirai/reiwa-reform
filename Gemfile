@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 # 静的サイトジェネレータ Middleman
-gem 'middleman'
+# gem 'middleman'
+gem 'middleman', github: 'middleman/middleman'
 gem 'webrick'
 
 # ベンダープリフィックス 自動付与する

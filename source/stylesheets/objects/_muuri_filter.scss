@@ -6,8 +6,10 @@ $shinryokushoku:    #339933; // 新緑色(しんりょくしょく)
 $gen:               #0d0d0d; // 玄(げん)
 
 .grid-wrapper {
-  max-width: 1240px;
-  width: calc(100vw - 20px);
+  // max-width: 1240px;
+  // max-width: 1100px;
+  // width: calc(100vw - 20px);
+  width: 100%;
 
   .grid {
     width: calc(100vw - 20px);
@@ -25,6 +27,98 @@ $gen:               #0d0d0d; // 玄(げん)
     }
     grid-gap: 10px;
   }
+
+  .form-group {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    @media (min-width: 480px) {
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+    #search-field {
+      width: 100%;
+      border: 1px solid rgb(188, 195, 206);
+      padding: 4.5px 21.6px 4.5px 7.2px;
+      border-radius: 2px;
+    }
+    .form-select {
+      width: 100%;
+    }
+  }
+
+  .form-select {
+    -webkit-appearance: none;
+    appearance: none;
+    appearance: none;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgb(255, 255, 255);
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23667189'%20d='M2%200L0%202h4zm0%205L0%203h4z'/%3E%3C/svg%3E");
+    background-origin: padding-box;
+    background-position: calc(100% - 6.3px) 50%;
+    background-position-x: calc(100% - 6.3px);
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    background-size: 7.2px 9px;
+    // border-bottom-color: rgb(188, 195, 206);
+    // border-bottom-left-radius: 1.8px;
+    // border-bottom-right-radius: 1.8px;
+    // border-bottom-style: solid;
+    // border-bottom-width: 0.5px;
+    // border-image-outset: 0;
+    // border-image-repeat: stretch;
+    // border-image-slice: 100%;
+    // border-image-source: none;
+    // border-image-width: 1;
+    // border-left-color: rgb(188, 195, 206);
+    // border-left-style: solid;
+    // border-left-width: 0.5px;
+    // border-right-color: rgb(188, 195, 206);
+    // border-right-style: solid;
+    // border-right-width: 0.5px;
+    // border-top-color: rgb(188, 195, 206);
+    // border-top-left-radius: 1.8px;
+    // border-top-right-radius: 1.8px;
+    // border-top-style: solid;
+    // border-top-width: 0.5px;
+
+    border: 1px solid rgb(188, 195, 206);
+    border-radius: 2px;
+
+    box-sizing: border-box;
+    color: rgb(59, 67, 81);
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-optical-sizing: auto;
+    font-size: 14.4px;
+    font-size-adjust: none;
+    font-stretch: 100%;
+    font-style: normal;
+    font-variant: normal;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    font-variation-settings: normal;
+    font-weight: 400;
+    // height: 32.4px;
+    // line-height: 21.6px;
+    margin: 0;
+    outline-color: rgb(59, 67, 81);
+    outline-style: none;
+    outline-width: 0px;
+    padding: 4.5px 21.6px 4.5px 7.2px;
+    text-rendering: optimizelegibility;
+    text-transform: none;
+    vertical-align: middle;
+    // width: 275px;
+    width: 100%;
+  }
 }
 
 .custom-content {
@@ -41,8 +135,9 @@ $gen:               #0d0d0d; // 玄(げん)
       h2.h6.card-title.ellipsis {
         margin: 0;
         padding: 0;
-        line-height: 1.2;
-        font-size: 0.85rem;
+        line-height: 1.4;
+        font-size: 16px;
+        letter-spacing: 0px;
 
         text-overflow: ellipsis;
         overflow: hidden;
@@ -64,7 +159,7 @@ $gen:               #0d0d0d; // 玄(げん)
         margin: 0;
         text-align: left;
         // font-size: 0.77rem;
-        font-size: 14.5px;
+        font-size: 15px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 4;

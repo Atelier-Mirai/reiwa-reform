@@ -1,0 +1,15 @@
+.section.breadSection
+  .container
+    .row
+      ol.breadcrumb itemtype="http://schema.org/BreadcrumbList"
+        li#panHome itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+          a href="https://homemade-reform.jp/" itemprop="item"
+            span itemprop="name"
+              i.fa.fa-home
+              | HOME
+        li#panHome itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+          a href="https://homemade-reform.com/" itemprop="item"
+            span itemprop="name"
+              | 施工事例
+        li
+          span = current_page.data.title

@@ -1,5 +1,9 @@
-h1.construction.name
-  | 【#{site}】#{name}
+---
+title: 【#{site}】#{name}
+---
+#BLANKLINE
+/ h1.construction.name
+/  | 【#{site}】#{name}
 p.construction.period
   | #{started} 〜 #{ended}
 p.construction.outline

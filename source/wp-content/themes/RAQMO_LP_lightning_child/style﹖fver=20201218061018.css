@@ -1,0 +1,657 @@
+@charset "utf-8";
+/*
+Theme Name: RAQMO-LP/CO
+Theme URI:
+Template: lightning
+Description: RAQMO-LP/CO
+Author: KIZUNA
+Tags: 
+Version: 0.1.2
+*/
+
+/* -------------------------------------------------------------------
+ base font
+------------------------------------------------------------------- */
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  color: #333;
+  font-size: 16px;
+  font-size: 1.4rem;
+  font-size: 100%\9;
+  /* for IE8 */
+  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "YuGothic", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS P Gothic", sans-serif;
+  -webkit-text-size-adjust: 100%;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@media all and (-ms-high-contrast:none) {
+  body {
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "YuGothic", "メイリオ", "Meiryo", "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  }
+}
+
+@media screen and (min-width:960px) and (max-width:1280px) {}
+
+@media screen and (min-width:600px) and (max-width:959px) {}
+
+@media screen and (max-width:599px) {}
+
+
+/* -------------------------------------------------------------------
+ base layout
+------------------------------------------------------------------- */
+a {
+  transition: 0.2s ease;
+}
+
+a:hover {
+  transition: 0.2s ease;
+}
+
+.container {
+  width: 100%;
+}
+
+.siteContent,.container-fixed {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home .siteContent {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header_pageTitle, h1.page-header_pageTitle:first-child {
+    max-width: 1200px;
+    margin: 30px auto;
+    text-align:center;
+}
+
+.breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.table tbody tr td,
+.table tbody tr th,
+.table td,
+.table th,
+.table thead tr td,
+.table thead tr th,
+table tbody tr td,
+table tbody tr th,
+table td,
+table th,
+table thead tr td,
+table thead tr th {
+  border-bottom: 1px solid #CCC;
+}
+
+.table tbody tr td,
+.table tbody tr th,
+.table td,
+.table th,
+.table thead tr td,
+.table thead tr th,
+table tbody tr td,
+table tbody tr th,
+table td,
+table th,
+table thead tr td,
+table thead tr th {
+  padding: 10px;
+}
+
+/* カラムアイテム使用時、左側のカラムのアイテムを右寄せにした時の上部にマージン削除 2019.10.15 */
+.alignright, img.alignright {
+	margin-top: 0;
+}
+
+/* Google Mapを埋め込んだ時に下側の空白削除 2019.10.15 */
+iframe {
+	vertical-align: bottom;
+}
+
+.vk-mobile-nav-menu-btn {
+  top: 8px;
+  left: 8px;
+  border: solid 1px #666;
+}
+
+.navbar-brand {
+  font-size: 125%;
+}
+
+.carousel-inner > .item h3.slide-text-title img {
+  width: 100px;
+}
+
+
+.container.sectionBox.copySection.text-center {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+footer .copySection {
+  border: none;
+}
+
+/* アコーディオンの調整 */
+body .su-spoiler-style-default > .su-spoiler-title {
+  padding: 15px 15px 15px 40px;
+}
+
+body .su-spoiler-style-default > .su-spoiler-title > .su-spoiler-icon {
+  left: 10px;
+  top: 15px;
+}
+
+body .su-spoiler-style-default > .su-spoiler-content {
+  padding: 10px 20px;
+}
+
+.acco {
+  background-color: #d5d2d2;
+}
+
+.su-spoiler-content {
+  background-color: #EEE;
+}
+
+/* カラムが落ちないようにする */
+/*.column-nd .wp-block-column {
+  flex-basis: auto;
+}
+
+@media (min-width: 0px) {
+  .wp-block-column {
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .has-2-columns .wp-block-column {
+    width: calc(50% - 30px);
+  }
+
+  .has-3-columns .wp-block-column {
+    width: calc(calc(100%/3) - 30px);
+  }
+
+  .has-4-columns .wp-block-column {
+    width: calc(25% - 30px);
+  }
+
+  .wp-block-columns {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+*/
+
+/* ページヘッダー画像調整 */
+.pagettl_bg {
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+/* 投稿カテゴリ調整用 */
+.entry-meta .entry-meta_items_term {
+    float: none;
+    margin-top: .5em;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+span.entry-meta_items.entry-meta_items_term {
+    float: none;
+    margin-right: 5px;
+}
+
+
+/* ページヘッダーにアイコンあるとき用 2019.10.15 */
+.pagettl_icon {
+	text-align: center;
+	margin: 25px 0;
+}
+.pagettl_icon .page-header_pageTitle {
+	margin: 10px 0 0;	
+}
+
+/* 見出しリセット */
+
+h2 {
+    background: initial;
+    border-top: 0px solid transparent;
+	border-bottom: 0px solid transparent;
+    font-weight: bold;
+    padding: initial;
+    font-size: 30px;
+    font-size: 3.0rem;
+    margin:0 auto 30px;
+}
+
+h3 {
+    border: initial;
+	box-shadow: initial;
+    font-weight:bold;
+    padding: initial;
+    margin:0 0 24px;
+}
+h3::after{
+    content: none;
+}
+
+h4{
+    background: initial;
+    font-weight:bold;
+    padding:unset;
+    margin:0 0 24px;
+}
+
+h1.widget-title.subSection-title {
+    box-shadow: initial;
+    border: initial;
+    padding: initial;
+    margin: initial;
+}
+
+h1.widget-title.subSection-title::after{
+    content:none;
+}
+
+/* -------------------------------------------------------------------
+ * フッター
+------------------------------------------------------------------- */
+.copySection >p:last-child {
+    display: none;
+}
+
+footer .container {
+	max-width: 100%;
+}
+
+/* -------------------------------------------------------------------
+ * スライドショー
+------------------------------------------------------------------- */
+
+/*シャドウ消す*/
+.carousel {
+    border-bottom: 0px;
+}
+/*スライド左右のシャドウ消す*/
+.carousel-control.left , .carousel-control.right{
+	background: none;
+}
+
+
+
+/* -------------------------------------------------------------------
+問い合わせフォーム用CSS 2019.10.15
+------------------------------------------------------------------- */
+
+.wpcf7 * {
+	border: none !important;
+	vertical-align: top;
+}
+
+.wpcf7 .required {
+	color: #ff8822;
+}
+
+div.wpcf7 {
+    width: 100vw;
+    max-width: 100vw !important;
+    position: relative;
+    left: calc(50% - 50vw);
+	background-color: #eee;
+	padding: 0 20px !important;
+}
+
+.wpcf7 form {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.wpcf7 input {
+	border-radius: 0;
+}
+
+.wpcf7 input[type=checkbox] {
+	margin-top: 7px;
+	width: 12px;
+	height:	12px;
+	-moz-transform:		scale(1.4);
+	-webkit-transform:	scale(1.4);
+	transform:		scale(1.4);
+}
+
+.wpcf7 input[type=submit] {
+	margin: 20px auto 0;
+	width: 100px;
+}
+
+input.form-control {
+	margin-bottom: 8px;
+}
+
+.wpcf7-form>p {
+	text-align: center;
+}
+
+.wpcf7 td {
+	padding: 5px;
+}
+
+@media screen and (max-width:1000px) { 
+	.wpcf7 td,
+	.wpcf7 th {
+		display: inline-block !important;
+	}
+	.wpcf7 td,
+	.wpcf7 input,
+	.wpcf7 textarea {
+		max-width: 100% !important;
+		width: 100%;
+	}
+	.wpcf7 th {
+		padding-bottom: 0 !important;
+	}
+
+}
+
+
+
+/* -------------------------------------------------------------------
+ header
+------------------------------------------------------------------- */
+/* ---------------------------------------
+共通
+--------------------------------------- */
+/*ヘッダー固定しない場合--*/
+
+/*
+header.navbar.siteHeader {
+  position: relative !important;
+  top: 0 !important;
+}
+
+div#top__fullcarousel {
+  margin-top: 0 !important;
+}
+
+.section.page-header.pagettl_bg{
+margin-top:0 !important;
+}
+*/
+/*--ヘッダー固定しない場合*/
+
+.siteHeader {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.siteHeadContainer {
+  padding: 0 !important;
+}
+
+@media screen and (max-width: 600px) {
+    .siteHeadContainer {
+      padding: 20px 0 !important;
+    }
+}
+
+.navbar-brand img {
+  max-height: 50px !important;
+  display: inline;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-contact {
+    display: none;
+  }
+}
+
+/* ---------------------------------------
+アイコン
+--------------------------------------- */
+/*
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 5px;
+}
+
+.nav > li > a::before {
+  content: "";
+  display: block;
+  margin: 0 auto 5px;
+  width: 20px;
+  height: 20px;
+  background-position: 50% 50%;
+  background-size: contain;
+  text-align: center;
+}
+
+.nav > li:nth-child(1) > a::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f005";
+}
+
+.nav > li:nth-child(2) > a::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f009";
+}
+
+.nav > li:nth-child(3) > a::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f013";
+}
+
+.nav > li:nth-child(4) > a::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f042";
+}
+
+.nav > li:nth-child(5) > a::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f023";
+}
+
+.nav > li:nth-child(6) > a::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f043";
+}
+
+.nav > li:nth-child(7) > a::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f043";
+}
+*/
+/*アイコン横の場合--*/
+
+/*
+.nav > li > a{
+  display:inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav > li > a::before{
+  margin:0 5px 0 0;
+}
+*/
+/*--アイコン横の場合*/
+
+/* ---------------------------------------
+patturn A (2列 ロゴ左)
+--------------------------------------- */
+
+/*
+.navbar-contact {
+  float: none;
+}
+
+.navbar-header {
+  float: none;
+}
+
+.nav::before,
+.nav::after {
+  content: none;
+}
+
+.siteHeadContainer::before {
+  content: none;
+}
+
+.navbar-contact {
+  width: 160px;
+}
+
+.navbar-contact img {
+  width: 100%;
+  height:auto;
+
+}
+
+.siteHeadcontainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.siteHeadContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+}
+
+
+.nav {
+  width: 100%;
+  margin: 0 auto;
+  display: inline-flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  float: none;
+}
+
+#gMenu_outer {
+  width: 100%;
+}
+*/
+
+
+
+/* ---------------------------------------
+patturn B (2列 ロゴ中央)
+--------------------------------------- */
+
+/* 
+.navbar-contact {
+  display: none;
+}
+
+.navbar-header {
+  float: none;
+}
+
+.navbar-header {
+  width: 100%;
+}
+
+.navbar-header > h1 {
+  width: 100%;
+  text-align: center;
+}
+
+.nav::before,
+.nav::after {
+  content: none;
+}
+
+.siteHeadContainer::before {
+  content: none;
+}
+
+.navbar-contact img {
+  width: 100%;
+  height: auto;
+}
+
+.siteHeadcontainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.siteHeadContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+}
+
+
+.nav {
+  width: 100%;
+  margin: 0 auto;
+  display: inline-flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  float: none;
+}
+
+#gMenu_outer {
+  width: 100%;
+} */
+/* ---------------------------------------
+patturn C (横並び)
+--------------------------------------- */
+
+
+.navbar-contact {
+  float: right;
+  width: 160px;
+}
+
+.navbar-contact img {
+  width: 100%;
+}
+
+.nav > li {
+  width: 120px;
+  
+}
+
+@media screen and (min-width: 992px) {
+  ul.gMenu {
+    margin: 0;
+  }
+}
+

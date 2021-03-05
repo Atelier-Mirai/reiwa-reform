@@ -75,6 +75,7 @@ module Ikadzuchi
       memo            = Ikadzuchi::memo(directory)
       # 頁を付与
       slim = Ikadzuchi::replace_with_pagination(photos_template, info, memo)
+
       # 施工写真達のslimを出力
       Ikadzuchi::write "#{directory}.html.slim", slim
 
@@ -314,6 +315,9 @@ class Template
         end
         template.body = str
       end
+
+      # #BLANKLINE を 空白文字に置換
+      template.header = template.header.gsub("#BLANKLINE", "")
       template
     end
   end

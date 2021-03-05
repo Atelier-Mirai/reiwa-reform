@@ -1,46 +1,107 @@
-main.page-main
-  .card
-    .card-header
-      h1.card-title.h4
-        | 岐阜の住宅リフォームなら「ホームメイド」
-      .card-subtitle.text-success.h5
-        | 「嬉しいリフォーム、楽しいリフォーム、ありがたいリフォーム」をあなたに。
-    .card-body
-      p.message
-        | 　ホームメイドは、住宅リフォームを専門とする会社です。
-        br
-        | 　江戸時代より続く歴史と伝統ある東材木町に居を構え、「住む人の愛が溢れる、やって良かった嬉しいリフォーム」の心をお客様にご提案いたします。
-        br
-        | 　木造住宅の外壁塗装・床や畳の入れ替え・内装クロス・建具補修・漆喰の塗替え・床の張替え・浴室台所などの水回り改修まで、どんなご要望にもお応えする住宅リフォームのスペシャリストです。
+---
+title: 住宅リフォームの施工事例
+---
 
-  .card
-    .card-header
-      h2.h4 住宅リフォームの施工事例
-    .card-body
-      p.message
-        | 　ホームメイドでは、岐阜を中心にさまざまなお客様の住宅リフォームを行って参りました。
-        br
-        | 　外壁防水塗装工事、水回り補修(システムキッチン、バスユニット、洗面所)、畳表替え、瓦補修、コーキング(充填材)打ち替え、金属サイディング貼り、木部取替補修工事、高圧洗浄、板塀塗装、カーポート補修など、さまざまな施工事例がございます。
-        br
-        | 　大規模な修繕工事から、浴室・台所などの簡易なリフォーム、台風被災の復旧、瓦・屋根工事、外壁工事の施工事例をご覧いただけます。
-        br
-        | 　工事名や工事内容での絞り込みもできます。
-        small
-          | (工事名を入力したあとに「改行」キーを押してください)
+.section.siteContent
+  .container
+    .row
+      #main.col.mainSection.mainSection-col-one.mainSection-marginBottom-on role="main"
+        #post-1179.post-1179.page.type-page.status-publish.has-post-thumbnail.hentry
+          .entry-body
+            .wp-block-group.pc_none
+              .wp-block-group__inner-container
+                .vk_spacer
+                  .vk_spacer-display-pc style="height:100px"
+                  .vk_spacer-display-tablet style="height:80px"
+                  .vk_spacer-display-mobile style="height:60px"
+                .wp-block-image
+                  figure.aligncenter.size-large.is-resized
+                    img.wp-image-1345 alt="" height="266" loading="lazy" sizes="(max-width: 306px) 100vw, 306px" src="./wp-content/uploads/img_char3.png" srcset="./wp-content/uploads/img_char3.png 409w, ./wp-content/uploads/img_char3-300x261.png 300w" width="306" /
+            .wp-block-group.section01
+              .wp-block-group__inner-container
+                .vk_spacer
+                  .vk_spacer-display-pc style="height:100px"
+                  .vk_spacer-display-tablet style="height:80px"
+                  .vk_spacer-display-mobile style="height:60px"
+                p.has-text-align-center.sp_txt_left
+                  | ホームメイドでは、お客様の暮らしに合わせた数々のリフォームを行ってまいりました。
+                  br
+                  | 外壁防水塗装工事、水回り補修(システムキッチン、バスユニット、洗面所)、畳表替え、瓦補修、コーキング(充填材)打ち替え、金属サイディング貼り、木部取替補修工事、高圧洗浄、板塀塗装、カーポート補修など、さまざまな施工事例がございます。
+                  br
+                  | 大規模な修繕工事から、浴室・台所などの簡易なリフォーム、台風被災の復旧、瓦・屋根工事、外壁工事の施工事例をご覧いただけます。
+                  br
+                  | 工事名や工事内容での絞り込みもできます。
+                  small
+                    | (工事名を入力したあとに「改行」キーを押してください)
 
-  // 施工事例のサムネイル
-  = partial "reform/results"
+                .vk_spacer
+                  .vk_spacer-display-pc style="height:40px"
+                  .vk_spacer-display-tablet style="height:30px"
+                  .vk_spacer-display-mobile style="height:20px"
 
-  .card
-    .card-header
-      h2.card-title.h4
-        | ホームメイド
-      h3.card-subtitle.text-success.h5
-        | お客様のご要望をオリジナルプランに変えて
-    .card-body
-      p.message
-       |「ホームメイド」は、お客様のご要望をオリジナルプランに変えて、楽しいリフォームを実現して行く会社です。伝統的な技術をもとに、自由な発想で新しいリフォームに挑戦します。
-       br
-       | 畳・ふすまのリニューアルから玄関ドアの入れ替え、ユニットバスやシステムキッチンなどの水回りの改修工事。外壁・外構、木部の塗装から補修まであらゆる角度から、「やって良かった嬉しいリフォーム」の心をお客様にご提案します。
-       br
-       | そんな家づくりのホームパートナー・ホームメイドを今後ともよろしくお願い致します。
+                = stylesheet_link_tag "style"
+                = javascript_include_tag "site", defer: true
+                // 施工事例のサムネイル
+                = partial "reform/results"
+                // muuri での 施工事例紹介
+                = javascript_include_tag 'web-animations.min.js', defer: true
+                = javascript_include_tag 'muuri.js', defer: true
+                = javascript_include_tag 'muuri_filter.js', defer: true
+
+                / .wp-block-columns.sub_cont_column
+                /   .wp-block-column
+                /     figure.wp-block-image.size-full
+                /       img.wp-image-1188 alt="" height="400" loading="lazy" sizes="(max-width: 700px) 100vw, 700px" src="./wp-content/uploads/img_4-1.jpg" srcset="./wp-content/uploads/img_4-1.jpg 700w, ./wp-content/uploads/img_4-1-300x171.jpg 300w" width="700" /
+                /   .wp-block-column
+                /     h4.ttl 忙しいお母さんのためのリフォーム
+                /     p.sp_br_none
+                /       | お子様が小学校にあがられるタイミングで、リビングにお子様スペースを作りたい。
+                /
+                / .vk_spacer
+                /   .vk_spacer-display-pc style="height:100px"
+                /   .vk_spacer-display-tablet style="height:80px"
+                /   .vk_spacer-display-mobile style="height:60px"
+                /
+                / .wp-block-columns.sub_cont_column.reverse
+                /   .wp-block-column
+                /     figure.wp-block-image.size-large
+                /       img.wp-image-1195 alt="" height="400" loading="lazy" sizes="(max-width: 700px) 100vw, 700px" src="./wp-content/uploads/img_4-2.jpg" srcset="./wp-content/uploads/img_4-2.jpg 700w, ./wp-content/uploads/img_4-2-300x171.jpg 300w" width="700" /
+                /   .wp-block-column
+                /     h4.ttl 奥さんのわがままリフォーム
+                /     p.sp_br_none
+                /       | お母さんにとって住まいはとても大切な場所♪
+                /
+                / .vk_spacer
+                /   .vk_spacer-display-pc style="height:100px"
+                /   .vk_spacer-display-tablet style="height:80px"
+                /   .vk_spacer-display-mobile style="height:60px"
+                /
+                / .wp-block-columns.sub_cont_column
+                /   .wp-block-column
+                /     figure.wp-block-image.size-large
+                /       img.wp-image-1196 alt="" height="400" loading="lazy" sizes="(max-width: 700px) 100vw, 700px" src="./wp-content/uploads/img_4-3.jpg" srcset="./wp-content/uploads/img_4-3.jpg 700w, ./wp-content/uploads/img_4-3-300x171.jpg 300w" width="700" /
+                /   .wp-block-column
+                /     h4.ttl ご主人のこだわりリフォーム
+                /     p.sp_br_none
+                /       | リモートワーク用のお仕事部屋が欲しい、小さい書斎や本棚が欲しいなど、お客様のご希望の空間作りのお手伝いをいたします。
+                /
+                / .vk_spacer
+                /   .vk_spacer-display-pc style="height:100px"
+                /   .vk_spacer-display-tablet style="height:80px"
+                /   .vk_spacer-display-mobile style="height:60px"
+                /
+                / .wp-block-columns.sub_cont_column.reverse
+                /   .wp-block-column
+                /     figure.wp-block-image.size-large
+                /       img.wp-image-1670 alt="" height="585" loading="lazy" sizes="(max-width: 1024px) 100vw, 1024px" src="./wp-content/uploads/pixta_31312307_XL4-1024x585.jpg" srcset="./wp-content/uploads/pixta_31312307_XL4-1024x585.jpg 1024w, ./wp-content/uploads/pixta_31312307_XL4-300x171.jpg 300w, ./wp-content/uploads/pixta_31312307_XL4-768x439.jpg 768w, ./wp-content/uploads/pixta_31312307_XL4-1536x877.jpg 1536w, ./wp-content/uploads/pixta_31312307_XL4-2048x1170.jpg 2048w" width="1024" /
+                /   .wp-block-column
+                /     h4.ttl お家をバリアフリーにリフォーム
+                /     p
+                /       | ご高齢の親御さんとの同居のためバリアフリーにリフォーム♪
+
+                .vk_spacer
+                  .vk_spacer-display-pc style="height:160px"
+                  .vk_spacer-display-tablet style="height:140px"
+                  .vk_spacer-display-mobile style="height:120px"
+
+      .col.subSection.sideSection.sideSection-col-one

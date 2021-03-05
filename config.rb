@@ -23,9 +23,11 @@ activate :gzip
 # end
 
 # レイアウト
-set :layout, 'site'
-page 'index.html', layout: 'top'
-page 'no_layout.html', layout: false
+# set :layout, 'site'
+# page 'index.html', layout: 'top'
+# page 'no_layout.html', layout: false
+set :layout, 'show'
+page 'index.html', layout: 'index'
 
 # ビルド時の設定
 configure :build do
