@@ -86,7 +86,6 @@ class Construction
     end
     h[:directory] = @directory
     h[:kinds]     = @kinds
-    h
   end
 
   def save(data_directory = "")

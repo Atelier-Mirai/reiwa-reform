@@ -27,26 +27,6 @@ module Ikadzuchi
         directories << dir.to_s
       end
 
-      # _description.csv: 工事概要と、工事現場が書かれているので、
-      # 読み込んで、配列に格納する。
-      # descriptions = []
-      # desc = Struct.new("Desc", :outline, :site)
-      # File.read('_description.csv').each_line do |line|
-      #   _, b, c = line.split(',')
-      #    descriptions << desc.new(b, c.chomp)
-      # end
-      #
-      # 昇順に並び替え
-      # directories = directories.sort { |a, b| a <=> b }
-      #
-      # # 併合開始
-      # directories.each_with_index do |dir, i|
-      #   c = Construction.new(dir)
-      #   c.outline = descriptions[i].outline if c.outline.nil?
-      #   c.site = descriptions[i].site if c.site.nil?
-      #   c.save(dir)
-      # end
-
       # 降順に並び替え
       directories = directories.sort { |a, b| b <=> a }
 
@@ -54,8 +34,8 @@ module Ikadzuchi
       results_template = Ikadzuchi::template("_results_template.txt")
       Ikadzuchi::write("_results.slim", results_template.header)
 
-      # 施工一覧用 サムネイルの追加と
-      # 各工事用のページを生成する
+      # 施工一覧用
+      # サムネイルの追加と各工事用のページを生成する
       directories.each do |directory|
         Ikadzuchi::generate(directory)
       end
