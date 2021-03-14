@@ -7,10 +7,10 @@ p.construction.period
 p.construction.outline
   | #{outline}
 
-  figure.work
-    figcaption
-      | #{caption}
-    img src="#{image}" alt="#{caption}"
-    .comment
-      p.text-dark
-        | #{comment}
+figure.work
+  figcaption
+    | #{caption}
+  img src="#{image}" alt="#{caption}"
+  .comment
+    p.text-dark
+      | #{comment}
