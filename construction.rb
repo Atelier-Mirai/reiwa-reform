@@ -32,7 +32,7 @@ module M
       if HASH.keys.map(&:to_s).include?(self)
         HASH[self.to_sym]
       elsif KINDS.keys.map(&:to_s).include?(self)
-        KINDS[self]
+        KINDS[self.to_sym]
       elsif KINDS.values.include?(self)
         HASH.key(self).to_s
       end
@@ -53,7 +53,8 @@ end
 class Construction
   using M
 
-  attr_accessor :name,         # 工事名称
+  attr_accessor :head,         # 以下の総称
+                :name,         # 工事名称
                 :started,      # 工事開始日
                 :ended,        # 工事完了日
                 :outline,      # 工事概要
@@ -61,15 +62,33 @@ class Construction
                 :kinds_pretty, # 工事種別
                 :photo,        # 工事完成写真
                 :site,         # 工事現場
-                :directory     # ディレクトリ
+                :directory,    # ディレクトリ
+
+                :body         # 各施工写真の caption, comment, imageファイル名の配列
+
+
+  # メモ型構造体
+  Memo = Struct.new(:caption, :comment, :image)
 
   def initialize(data_directory)
-    File.read("#{data_directory}/_information.txt").each_line do |line|
+    construction = Template.read("#{data_directory}/_information.txt")
+    @head = {}
+    construction.head.each_line do |line|
       k, v = line.chomp.split('：')
-      instance_variable_set("@#{k.to_symbol}", v)
+      @head[k.to_symbol] = v
+      # instance_variable_set("@#{k.to_symbol}", v)
     end
+    @head[:kinds] = M::KINDS[@head[:kinds_pretty].to_sym]
+
+    # 各フィールドを読み込み、arrayに格納する
+    array = []
+    construction.body.each_line do |line|
+      caption, comment, image = line.chomp.split(',').map(&:strip)
+      array << Memo.new(caption, comment, "#{data_directory}/#{image}")
+    end
+    @body = array
+
     @directory = data_directory
-    @kinds     = M::KINDS[@kinds_pretty.to_sym]
   end
 
   def show

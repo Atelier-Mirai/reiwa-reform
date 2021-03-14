@@ -31,8 +31,9 @@ module Ikadzuchi
       directories = directories.sort { |a, b| b <=> a }
 
       # 施工一覧用の見出し部分を生成する
-      results_template = Ikadzuchi::template("_results_template.txt")
-      Ikadzuchi::write("_results.slim", results_template.header)
+      # results_template = Ikadzuchi::template("_results_template.txt")
+      results_template = Template.read("_results_template.txt")
+      Ikadzuchi::write("_results.slim", results_template.head)
 
       # 施工一覧用
       # サムネイルの追加と各工事用のページを生成する
@@ -47,21 +48,22 @@ module Ikadzuchi
     # @return "#{construction_name}.slim" ファイルが生成される
     ################################################################################
     def generate(directory)
-      # 雛形ファイルを読み込む ページネーション有効
-      photos_template = Ikadzuchi::template("_photos_template.txt", true)
       # 工事情報を読み込む
-      info            = Construction.new(directory)
-      # 備忘録を読み込む
-      memo            = Ikadzuchi::memo(directory)
-      # 頁を付与
-      slim = Ikadzuchi::replace_with_pagination(photos_template, info, memo)
+      information  = Construction.new(directory)
 
-      # 施工写真達のslimを出力
+      # 雛形ファイルを読み込む ページネーション有効
+      photos_template = Template.read("_photos_template.txt", true)
+
+      # 施工写真用雛形を置換
+      slim = Ikadzuchi::replace_with_pagination(photos_template, information)
+
+      # 施工写真のslimを出力
       Ikadzuchi::write "#{directory}.html.slim", slim
 
       # 施工事例一覧に、この工事のサムネイルを追記する
-      results_template = Ikadzuchi::template("_results_template.txt")
-      thumbnail_slim   = Ikadzuchi::replace(results_template.body, info)
+      results_template = Template.read("_results_template.txt")
+      thumbnail_slim   = Ikadzuchi::replace(results_template.body, information.head)
+      thumbnail_slim   = thumbnail_slim.gsub("\#{directory}", information.directory)
       Ikadzuchi::append "_results.slim", thumbnail_slim
     end
 
@@ -129,20 +131,18 @@ module Ikadzuchi
     # @param [String] filanem 備忘録のファイル名
     # @return [Array] 読み込んだ備忘録
     ################################################################################
-    # メモ型構造体
-    Memo = Struct.new(:caption, :comment, :image)
-
-    def memo(directory)
-      # 各フィールドを読み込み、arrayに格納する
-      array = []
-      File.read("#{directory}/_memo.csv").each_line.with_index do |line, i|
-        next if i == 0 # 先頭行はカラム名なので読み飛ばす
-
-        caption, comment, image = line.chomp.split(',').map(&:strip)
-        array << Memo.new(caption, comment, "#{directory}/#{image}")
-      end
-      array
-    end
+    # # メモ型構造体
+    # Memo = Struct.new(:caption, :comment, :image)
+    #
+    # def memo(directory)
+    #   # 各フィールドを読み込み、arrayに格納する
+    #   array = []
+    #   File.read("#{directory}/_memo.csv").each_line do |line|
+    #     caption, comment, image = line.chomp.split(',').map(&:strip)
+    #     array << Memo.new(caption, comment, "#{directory}/#{image}")
+    #   end
+    #   array
+    # end
 
     ################################################################################
     # 雛形を置換する
@@ -154,8 +154,10 @@ module Ikadzuchi
       data = data.to_h if data.kind_of? Struct
       data = data.to_h if data.kind_of? Construction
 
-      data&.each do |key, value|
-        template = template.gsub("\#{#{key}}", value.to_s)
+      if data.kind_of? Hash
+        data&.each do |key, value|
+          template = template.gsub("\#{#{key}}", value.to_s)
+        end
       end
       template
     end
@@ -165,19 +167,19 @@ module Ikadzuchi
     # @param  [String]  template 雛形
     # @param  [Hash]    info 工事情報
     # @param  [String]  array 置換用 key/value hashの配列
-    # @param  [Integer] per_page  一頁に何枚の写真を表示させるか
     # @return [String]  置換後のtemplate
     ################################################################################
-    def replace_with_pagination(template, info, memo, per_page = 12)
+    def replace_with_pagination(photos_template, information)
 
+      per_page = 12 # 一頁に12枚の写真を表示する
       current_page = 1
-      total_pages  = (memo.count / per_page.to_f).ceil
+      total_pages  = (information.body.count / per_page.to_f).ceil
 
       # 施工写真達の先頭に工事名称生成
-      slim = Ikadzuchi::replace(template.header, info)
+      slim = Ikadzuchi::replace(photos_template.head, information.head)
       slim << "\n"
 
-      memo.each.with_index(1) do |memo, i|
+      information.body.each.with_index(1) do |memo, i|
         # ページ先頭であれば、.active 付与
         active = current_page == 1 ? '.active' : ''
 
@@ -188,7 +190,7 @@ module Ikadzuchi
         end
 
         # 真ん中の写真達
-        slim << Ikadzuchi::replace(template.body, memo)
+        slim << Ikadzuchi::replace(photos_template.body, memo)
 
         # 施工写真達の末尾にページネーション生成
         if i % per_page == 0
@@ -198,7 +200,7 @@ module Ikadzuchi
       end
 
       # 最終頁の末尾にページネーション生成
-      if per_page * total_pages != memo.count
+      if per_page * total_pages != information.body.count
         slim << pagination(current_page: current_page, total_pages: total_pages)
       end
       slim
@@ -255,7 +257,7 @@ end
 require 'singleton'
 class Template
   include Singleton
-  attr_accessor :header, :body, :all
+  attr_accessor :head, :body, :all
 
   def initialize
     @template = ""
@@ -265,23 +267,23 @@ class Template
     def read(filename, pagination = false)
       template        = Template.instance
       template.all    = ""
-      template.header = ""
+      template.head = ""
       template.body   = ""
 
       # テンプレートファイルを読み込む
       t = File.read filename
 
-      mode = :header
+      mode = :head
       t.each_line do |line|
         template.all << line
-        # 改行までがheader 改行後がbody
+        # 改行までがhead 改行後がbody
         if line =~ /^\R/
           mode = :body
           next
         end
         case mode
-        when :header
-          template.header << line
+        when :head
+          template.head << line
         when :body
           template.body << line
         end
@@ -297,7 +299,8 @@ class Template
       end
 
       # #BLANKLINE を 空白文字に置換
-      template.header = template.header.gsub("#BLANKLINE", "")
+      template.all  = template.all.gsub("#BLANKLINE", "")
+      template.head = template.head.gsub("#BLANKLINE", "")
       template
     end
   end
