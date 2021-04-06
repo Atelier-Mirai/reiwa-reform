@@ -36,7 +36,7 @@ configure :build do
   activate :minify_html
   # CSS 圧縮
   activate :minify_css
-  # # JavaScript 圧縮
+  # JavaScript 圧縮
   activate :minify_javascript,
     compressor: proc {
       ::Uglifier.new(
